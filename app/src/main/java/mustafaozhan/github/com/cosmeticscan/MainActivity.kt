@@ -1,60 +1,37 @@
 package mustafaozhan.github.com.cosmeticscan
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.widget.TextView;
-
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
-
-import java.io.IOException;
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.SurfaceHolder
+import android.view.SurfaceView
+import android.widget.TextView
+import com.google.android.gms.vision.CameraSource
+import com.google.android.gms.vision.Detector
+import com.google.android.gms.vision.text.TextBlock
+import com.google.android.gms.vision.text.TextRecognizer
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
 
-    internal lateinit var cameraView: SurfaceView
-    internal lateinit var textView: TextView
+
+
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            RequestCameraPermissionID -> {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        return
-                    }
-                    try {
-                        cameraSource.start(cameraView.holder)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-
-                }
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        cameraView = findViewById(R.id.surface_view) as SurfaceView
-        textView = findViewById(R.id.text_view) as TextView
-
         val textRecognizer = TextRecognizer.Builder(applicationContext).build()
-        if (!textRecognizer.isOperational()) {
+
+        if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
 
@@ -64,18 +41,21 @@ class MainActivity : AppCompatActivity() {
                     .setRequestedFps(2.0f)
                     .setAutoFocusEnabled(true)
                     .build()
-            cameraView.holder.addCallback(object : SurfaceHolder.Callback {
+
+            surface_view.holder.addCallback(object : SurfaceHolder.Callback {
+
+
                 override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
                     try {
                         if (ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
                             ActivityCompat.requestPermissions(this@MainActivity,
-                                    arrayOf<String>(Manifest.permission.CAMERA),
+                                    arrayOf(Manifest.permission.CAMERA),
                                     RequestCameraPermissionID)
                             return
                         }
-                        cameraSource.start(cameraView.holder)
+                        cameraSource.start(surface_view.holder)
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
@@ -98,20 +78,39 @@ class MainActivity : AppCompatActivity() {
 
                 override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
 
-                    val items = detections.getDetectedItems()
+                    val items = detections.detectedItems
                     if (items.size() != 0) {
-                        textView.post {
+                        text_view.post {
                             val stringBuilder = StringBuilder()
                             for (i in 0..items.size() - 1) {
                                 val item = items.valueAt(i)
-                                stringBuilder.append(item.getValue())
+                                stringBuilder.append(item.value)
                                 stringBuilder.append("\n")
                             }
-                            textView.text = stringBuilder.toString()
+                            text_view.text = stringBuilder.toString()
                         }
                     }
                 }
             })
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            RequestCameraPermissionID -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        return
+                    }
+                    try {
+                        cameraSource.start(surface_view.holder)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+
+                }
+            }
         }
     }
 }
