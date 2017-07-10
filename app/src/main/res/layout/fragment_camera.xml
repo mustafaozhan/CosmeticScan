@@ -10,19 +10,29 @@
         android:layout_height="match_parent">
 
         <SurfaceView
-            android:id="@+id/surface_view"
+            android:id="@+id/surfaceView"
 
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/text_view"
+            android:id="@+id/txtScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="No Text"
+
             android:textColor="@android:color/white"
             android:textSize="20sp" />
+        <TextView
+            android:id="@+id/txtResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:textSize="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 </FrameLayout>

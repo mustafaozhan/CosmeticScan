@@ -2,24 +2,29 @@ package mustafaozhan.github.com.cosmeticscan.ui.fragments
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.*
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.SurfaceHolder
+import android.view.View
+import android.view.ViewGroup
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
+import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import java.io.IOException
 
 
 class CameraFragment : Fragment() {
 
-    internal lateinit var cameraView: SurfaceView
-    internal lateinit var textView: TextView
+
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
@@ -30,8 +35,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun bindViews(view: View) {
-        cameraView = view.findViewById<View>(R.id.surface_view) as SurfaceView
-        textView = view.findViewById<View>(R.id.text_view) as TextView
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,6 +46,44 @@ class CameraFragment : Fragment() {
     private fun init() {
 
         val textRecognizer = TextRecognizer.Builder(activity).build()
+
+        txtScan.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (s.isNotEmpty()) {
+                    if (s.contains("titanyum")&& !txtResult.text.contains("titanyum")) {
+                        txtResult.text = "titanyum\n"+txtResult.text
+                        txtResult.setTextColor(Color.RED)
+                    }
+                    if (s.contains("ambalaj")&& !txtResult.text.contains("ambalaj")) {
+                        txtResult.text = "ambalaj\n"+txtResult.text
+                        txtResult.setTextColor(Color.YELLOW)
+                    }
+                    if (s.contains("korunacak")&& !txtResult.text.contains("korunacak")) {
+                        txtResult.text = "korunacak\n"+txtResult.text
+                        txtResult.setTextColor(Color.GREEN)
+                    }
+                    if (s.contains("okuyunuz")&& !txtResult.text.contains("okuyunuz")) {
+                        txtResult.text = "okuyunuz\n"+txtResult.text
+                        txtResult.setTextColor(Color.YELLOW)
+                    }
+                    if (s.contains("yerlerde")&& !txtResult.text.contains("yerlerde")) {
+                        txtResult.text = "yerlerde\n"+txtResult.text
+                        txtResult.setTextColor(Color.RED)
+                    }
+
+
+                }
+            }
+        })
         if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
@@ -52,7 +94,7 @@ class CameraFragment : Fragment() {
                     .setRequestedFps(2.0f)
                     .setAutoFocusEnabled(true)
                     .build()
-            cameraView.holder.addCallback(object : SurfaceHolder.Callback {
+            surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
                 override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
                     try {
@@ -63,7 +105,7 @@ class CameraFragment : Fragment() {
                                     RequestCameraPermissionID)
                             return
                         }
-                        cameraSource.start(cameraView.holder)
+                        cameraSource.start(surfaceView.holder)
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
@@ -88,14 +130,14 @@ class CameraFragment : Fragment() {
 
                     val items = detections.detectedItems
                     if (items.size() != 0) {
-                        textView.post {
+                        txtScan.post {
                             val stringBuilder = StringBuilder()
                             for (i in 0..items.size() - 1) {
                                 val item = items.valueAt(i)
                                 stringBuilder.append(item.value)
                                 stringBuilder.append("\n")
                             }
-                            textView.text = stringBuilder.toString()
+                            txtScan.text = stringBuilder.toString()
                         }
                     }
                 }
@@ -113,7 +155,7 @@ class CameraFragment : Fragment() {
                         return
                     }
                     try {
-                        cameraSource.start(cameraView.holder)
+                        cameraSource.start(surfaceView.holder)
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
