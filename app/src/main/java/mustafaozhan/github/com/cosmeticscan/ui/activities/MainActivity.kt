@@ -2,16 +2,17 @@ package mustafaozhan.github.com.cosmeticscan.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import mustafaozhan.github.com.cosmeticscan.R
+import mustafaozhan.github.com.cosmeticscan.common.model.DatabaseAccess
 import mustafaozhan.github.com.cosmeticscan.ui.fragments.CameraFragment
 import mustafaozhan.github.com.cosmeticscan.ui.fragments.ManualFragment
 import java.util.*
@@ -20,22 +21,13 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
 
-    private var toolbar: Toolbar? = null
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-
-        viewPager = findViewById(R.id.viewpager) as ViewPager
-        setupViewPager(viewPager!!)
-
-        tabLayout = findViewById(R.id.tabs) as TabLayout
-        tabLayout!!.setupWithViewPager(viewPager)
+        setupViewPager(viewpager)
+        tabs.setupWithViewPager(viewpager)
 
     }
 
@@ -57,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
-            R.id.settings->startActivity(Intent(applicationContext,SettingsActivity::class.java))
+            R.id.settings -> startActivity(Intent(applicationContext, SettingsActivity::class.java))
 
             else -> {
             }

@@ -14,7 +14,7 @@ class IngredientsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients)
-        val data: String? = null
+
         val extras = intent.extras
         if (extras != null) {
             // data = extras.getString("data")
@@ -35,7 +35,7 @@ class IngredientsActivity : AppCompatActivity() {
 
         //adding some dummy data to the list
 
-        ingredient.add(Ingredient("Ingredient"))
+     //   ingredient.add(Ingredient("Ingredient"))
 
 
         //creating our adapter

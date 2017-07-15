@@ -13,11 +13,11 @@ class ManualFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_manual, container, false)
-        bindViews(fragmentView)
+//        bindViews(fragmentView)
         return fragmentView
     }
 
-    private fun bindViews(view: View) {}
+//    private fun bindViews(view: View) {}
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
