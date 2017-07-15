@@ -1,8 +1,8 @@
 package mustafaozhan.github.com.cosmeticscan.ui.fragments
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
@@ -19,33 +19,45 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
+import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
 import java.io.IOException
 
 
 class CameraFragment : Fragment() {
 
+    val RED = "#FF1744"
+    val ORANGE = "#FF3D00"
+    val YELLOW = "#FFEA00"
+    val BLUE = "#2979FF"
+    val GREEN = "#00E676"
 
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
-        bindViews(fragmentView)
         return fragmentView
     }
 
-    private fun bindViews(view: View) {
-
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        mProgressBar.progress
+
         init()
     }
 
     private fun init() {
 
         val textRecognizer = TextRecognizer.Builder(activity).build()
+        txtResult.setOnClickListener {
+
+
+            val intent = Intent(context, IngredientsActivity::class.java)
+            intent.putExtra("data", txtResult.text.toString())
+            startActivity(intent)
+
+        }
 
         txtScan.addTextChangedListener(object : TextWatcher {
 
@@ -59,31 +71,26 @@ class CameraFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isNotEmpty()) {
-                    if (s.contains("titanyum")&& !txtResult.text.contains("titanyum")) {
-                        txtResult.text = "titanyum\n"+txtResult.text
-                        txtResult.setTextColor(Color.RED)
-                    }
-                    if (s.contains("ambalaj")&& !txtResult.text.contains("ambalaj")) {
-                        txtResult.text = "ambalaj\n"+txtResult.text
-                        txtResult.setTextColor(Color.YELLOW)
-                    }
-                    if (s.contains("korunacak")&& !txtResult.text.contains("korunacak")) {
-                        txtResult.text = "korunacak\n"+txtResult.text
-                        txtResult.setTextColor(Color.GREEN)
-                    }
-                    if (s.contains("okuyunuz")&& !txtResult.text.contains("okuyunuz")) {
-                        txtResult.text = "okuyunuz\n"+txtResult.text
-                        txtResult.setTextColor(Color.YELLOW)
-                    }
-                    if (s.contains("yerlerde")&& !txtResult.text.contains("yerlerde")) {
-                        txtResult.text = "yerlerde\n"+txtResult.text
-                        txtResult.setTextColor(Color.RED)
-                    }
+                    if (s.contains("titanyum") && !txtResult.text.contains("titanyum"))
+                        txtResult.text = txtResult.text.toString() + "titanyum\n"
+
+                    if (s.contains("ambalaj") && !txtResult.text.contains("ambalaj"))
+                        txtResult.text = txtResult.text.toString() + "ambalaj\n"
+
+                    if (s.contains("korunacak") && !txtResult.text.contains("korunacak"))
+                        txtResult.text = txtResult.text.toString() + "korunacak\n"
+
+                    if (s.contains("okuyunuz") && !txtResult.text.contains("okuyunuz"))
+                        txtResult.text = txtResult.text.toString() + "okuyunuz\n"
+
+                    if (s.contains("yerlerde") && !txtResult.text.contains("yerlerde"))
+                        txtResult.text = txtResult.text.toString() + "yerlerde\n"
 
 
                 }
             }
         })
+
         if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
@@ -165,5 +172,8 @@ class CameraFragment : Fragment() {
         }
     }
 
-
+    override fun onResume() {
+        super.onResume()
+    txtResult.text=""
+    }
 }
