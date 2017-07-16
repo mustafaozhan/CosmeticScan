@@ -19,8 +19,11 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
+import mustafaozhan.github.com.cosmeticscan.common.extensions.checkDatabase
 import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
 import ninja.sakib.pultusorm.core.PultusORM
+import org.jetbrains.anko.async
+import org.jetbrains.anko.uiThread
 import java.io.IOException
 
 
@@ -58,7 +61,8 @@ class CameraFragment : Fragment() {
     }
 
     private fun init() {
-
+        val appPath = context.filesDir.absolutePath  // Output : /data/data/application_package_name/files/
+        val mDatabase = PultusORM("CosmeticScan.db", appPath)
         val textRecognizer = TextRecognizer.Builder(activity).build()
         txtResult.setOnClickListener {
 
@@ -81,20 +85,15 @@ class CameraFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isNotEmpty()) {
-                    if (s.contains("titanyum") && !txtResult.text.contains("titanyum"))
-                        txtResult.text = txtResult.text.toString() + "titanyum\n"
+                    var temp:String
 
-                    if (s.contains("ambalaj") && !txtResult.text.contains("ambalaj"))
-                        txtResult.text = txtResult.text.toString() + "ambalaj\n"
-
-                    if (s.contains("korunacak") && !txtResult.text.contains("korunacak"))
-                        txtResult.text = txtResult.text.toString() + "korunacak\n"
-
-                    if (s.contains("okuyunuz") && !txtResult.text.contains("okuyunuz"))
-                        txtResult.text = txtResult.text.toString() + "okuyunuz\n"
-
-                    if (s.contains("yerlerde") && !txtResult.text.contains("yerlerde"))
-                        txtResult.text = txtResult.text.toString() + "yerlerde\n"
+                    async {
+                        temp= mDatabase.checkDatabase(mDatabase,s,txtResult.text.toString()).toString()
+                        uiThread {
+                            if (!txtResult.text.contains(temp))
+                            txtResult.text=txtResult.text.toString()+temp
+                        }
+                    }
 
 
                 }

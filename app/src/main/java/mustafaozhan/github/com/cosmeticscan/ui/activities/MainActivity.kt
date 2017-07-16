@@ -25,7 +25,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "databaseURL"
+    private val URL = "dataUrl"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
