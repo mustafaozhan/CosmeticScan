@@ -13,15 +13,14 @@ import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.DatabaseAccess
 import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
+import ninja.sakib.pultusorm.core.PultusORM
 import java.io.IOException
 
 
@@ -33,11 +32,16 @@ class CameraFragment : Fragment() {
     val BLUE = "#2979FF"
     val GREEN = "#00E676"
 
+
+
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
+
+
+
         return fragmentView
     }
 
@@ -46,11 +50,9 @@ class CameraFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         mProgressBar.progress
 
-        val databaseAccess = DatabaseAccess.getInstance(context)
-        databaseAccess.open()
-        val list = databaseAccess.getAllIngredients()
-        Toast.makeText(context, "This is  " + list?.get(0)?.name, Toast.LENGTH_SHORT).show()
-        databaseAccess.close()
+
+
+
 
         init()
     }
@@ -182,6 +184,6 @@ class CameraFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-    txtResult.text=""
+        txtResult.text = ""
     }
 }

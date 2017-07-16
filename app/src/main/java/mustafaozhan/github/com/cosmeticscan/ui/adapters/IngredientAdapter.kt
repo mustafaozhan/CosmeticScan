@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row.view.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
+import mustafaozhan.github.com.cosmeticscan.common.model.Ingredients
 
 /**
 Created by Mustafa Özhan on 7/14/17 at 2:45 PM on Linux.
 
  */
-class IngredientAdapter(val ingredientList: List<Ingredient>) :
+class IngredientAdapter(val ingredientsList: List<Ingredients>) :
         RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,16 +21,16 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindForecast(ingredientList[position])
+        holder.bindForecast(ingredientsList[position])
     }
 
-    override fun getItemCount() = ingredientList.size
+    override fun getItemCount() = ingredientsList.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindForecast(ingredient: Ingredient) {
+        fun bindForecast(ingredients: Ingredients) {
 
-            itemView.txtName.text = ingredient.name
+            itemView.txtName.text = ingredients.name
 
 
         }
