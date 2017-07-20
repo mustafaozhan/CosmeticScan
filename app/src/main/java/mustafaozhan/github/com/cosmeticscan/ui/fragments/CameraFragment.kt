@@ -19,11 +19,7 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.extensions.checkDatabase
 import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
-import ninja.sakib.pultusorm.core.PultusORM
-import org.jetbrains.anko.async
-import org.jetbrains.anko.uiThread
 import java.io.IOException
 
 
@@ -34,7 +30,6 @@ class CameraFragment : Fragment() {
     val YELLOW = "#FFEA00"
     val BLUE = "#2979FF"
     val GREEN = "#00E676"
-
 
 
     internal lateinit var cameraSource: CameraSource
@@ -61,8 +56,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun init() {
-        val appPath = context.filesDir.absolutePath  // Output : /data/data/application_package_name/files/
-        val mDatabase = PultusORM("CosmeticScan.db", appPath)
+
         val textRecognizer = TextRecognizer.Builder(activity).build()
         txtResult.setOnClickListener {
 
@@ -85,15 +79,7 @@ class CameraFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isNotEmpty()) {
-                    var temp:String
-
-                    async {
-                        temp= mDatabase.checkDatabase(mDatabase,s,txtResult.text.toString()).toString()
-                        uiThread {
-                            if (!txtResult.text.contains(temp))
-                            txtResult.text=txtResult.text.toString()+temp
-                        }
-                    }
+                    var temp: String
 
 
                 }

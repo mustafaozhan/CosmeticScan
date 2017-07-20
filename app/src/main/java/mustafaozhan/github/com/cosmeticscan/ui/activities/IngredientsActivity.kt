@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.Ingredients
+import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.ui.adapters.IngredientAdapter
 
 class IngredientsActivity : AppCompatActivity() {
@@ -28,14 +28,14 @@ class IngredientsActivity : AppCompatActivity() {
 
 
         //crating an arraylist to store users using the data class user
-        val ingredient = ArrayList<Ingredients>()
+        val ingredient = ArrayList<Ingredient>()
 
        // val c: data
 
 
         //adding some dummy data to the list
 
-     //   ingredient.add(Ingredients("Ingredients"))
+     //   ingredient.add(Ingredient("Ingredient"))
 
 
         //creating our adapter
