@@ -1,13 +1,10 @@
 package mustafaozhan.github.com.cosmeticscan.ui.fragments
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.SurfaceHolder
@@ -19,8 +16,11 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
+import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
 class CameraFragment : Fragment() {
@@ -37,6 +37,7 @@ class CameraFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
+
 
 
 
@@ -58,33 +59,9 @@ class CameraFragment : Fragment() {
     private fun init() {
 
         val textRecognizer = TextRecognizer.Builder(activity).build()
-        txtResult.setOnClickListener {
 
 
-            val intent = Intent(context, IngredientsActivity::class.java)
-            intent.putExtra("data", txtResult.text.toString())
-            startActivity(intent)
 
-        }
-
-        txtScan.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.isNotEmpty()) {
-                    var temp: String
-
-
-                }
-            }
-        })
 
         if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
@@ -137,9 +114,21 @@ class CameraFragment : Fragment() {
                             for (i in 0..items.size() - 1) {
                                 val item = items.valueAt(i)
                                 stringBuilder.append(item.value)
-                                stringBuilder.append("\n")
                             }
-                            txtScan.text = stringBuilder.toString()
+                           // txtScan.text = stringBuilder.toString()
+
+
+                            Observable.create(Observable.OnSubscribe<String> { subscriber ->
+                                subscriber.onNext(stringBuilder.toString())
+                            }).debounce(500, TimeUnit.MILLISECONDS)
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe({
+                                        text ->
+                                        txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString())
+                                    })
+
+
+
                         }
                     }
                 }
@@ -169,6 +158,6 @@ class CameraFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        txtResult.text = ""
+        txtScan.text = ""
     }
 }

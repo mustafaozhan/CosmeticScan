@@ -24,21 +24,14 @@
 
         <TextView
             android:id="@+id/txtScan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:textColor="@android:color/white"
-            android:id="@+id/txtResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:textSize="14sp" />
+            android:layout_centerHorizontal="true" />
+
+
     </RelativeLayout>
 
 </FrameLayout>

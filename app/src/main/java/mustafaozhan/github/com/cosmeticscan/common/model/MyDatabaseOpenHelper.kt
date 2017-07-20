@@ -9,6 +9,11 @@ Created by Mustafa Özhan on 7/20/17 at 8:19 PM on Linux <3.
 
  */
 class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatabase", null, 1) {
+    val parser = rowParser {
+        id: Int, name: String, information: String, category: String, rating: String ->
+        Ingredient(id, name, information, category, rating)
+    }
+
     companion object {
         private var instance: MyDatabaseOpenHelper? = null
 
@@ -74,7 +79,27 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         }
     }
 
+    fun allTasks() = use {
+        select(TABLE_NAME)
+                .exec {
+                    parseList(parser)
+                }
+    }
 
+
+    fun searchInDatabase(fromCamera: String): String? {
+        var result: String = ""
+      var tempList=use {
+            select(TABLE_NAME)
+                    .column(NAME)
+                    .exec { parseList(StringParser)}
+
+        }
+        for (i in 0..tempList.size-1)
+            if(fromCamera.contains(tempList[i],ignoreCase = true))
+                result=result+"\n"+tempList[i]
+        return result
+    }
 }
 
 // Access property for Context

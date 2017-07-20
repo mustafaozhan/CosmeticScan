@@ -17,7 +17,6 @@ import mustafaozhan.github.com.cosmeticscan.common.model.database
 import mustafaozhan.github.com.cosmeticscan.ui.fragments.CameraFragment
 import mustafaozhan.github.com.cosmeticscan.ui.fragments.ManualFragment
 import mustafaozhan.github.com.cosmeticscan.utils.HttpHandler
-import org.jetbrains.anko.db.select
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.*
@@ -53,10 +52,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-
-//        println("================>"+database.getIngredientList())
-
-
     }
 
 
