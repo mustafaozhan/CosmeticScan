@@ -124,7 +124,7 @@ class CameraFragment : Fragment() {
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe({
                                         text ->
-                                        txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString())
+                                        txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(),txtScan.text.toString())
                                     })
 
 

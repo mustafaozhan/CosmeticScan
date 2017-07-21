@@ -87,18 +87,18 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
     }
 
 
-    fun searchInDatabase(fromCamera: String): String? {
+    fun searchInDatabase(fromCamera: String, alreadyHave: String): String? {
         var result: String = ""
-      var tempList=use {
+        var tempList = use {
             select(TABLE_NAME)
                     .column(NAME)
-                    .exec { parseList(StringParser)}
+                    .exec { parseList(StringParser) }
 
         }
-        for (i in 0..tempList.size-1)
-            if(fromCamera.contains(tempList[i],ignoreCase = true))
-                result=result+"\n"+tempList[i]
-        return result
+        for (i in 0..tempList.size - 1)
+            if (fromCamera.contains(tempList[i], ignoreCase = true) && !alreadyHave.contains(tempList[i]))
+                result = result + " " + tempList[i]
+        return (result + alreadyHave)
     }
 }
 
