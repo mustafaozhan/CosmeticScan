@@ -1,15 +1,13 @@
 package mustafaozhan.github.com.cosmeticscan.ui.fragments
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.SurfaceHolder
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
@@ -17,6 +15,7 @@ import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
+import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import java.io.IOException
@@ -37,7 +36,7 @@ class CameraFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
-
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 
 
@@ -60,6 +59,11 @@ class CameraFragment : Fragment() {
 
         val textRecognizer = TextRecognizer.Builder(activity).build()
 
+        txtScan.setOnClickListener {
+            val intent = Intent(context, IngredientsActivity::class.java)
+            intent.putExtra("data", txtScan.text)
+            startActivity(intent)
+        }
 
 
 
@@ -115,7 +119,7 @@ class CameraFragment : Fragment() {
                                 val item = items.valueAt(i)
                                 stringBuilder.append(item.value)
                             }
-                           // txtScan.text = stringBuilder.toString()
+                            // txtScan.text = stringBuilder.toString()
 
 
                             Observable.create(Observable.OnSubscribe<String> { subscriber ->
@@ -124,9 +128,8 @@ class CameraFragment : Fragment() {
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe({
                                         text ->
-                                        txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(),txtScan.text.toString())
+                                        txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
                                     })
-
 
 
                         }

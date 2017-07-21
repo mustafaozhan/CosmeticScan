@@ -31,6 +31,9 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
         fun bindForecast(ingredient: Ingredient) {
 
             itemView.txtName.text = ingredient.name
+            itemView.txtInformation.text=ingredient.information
+            itemView.txtCategory.text=ingredient.category
+            itemView.txtRating.text=ingredient.rating
 
 
         }

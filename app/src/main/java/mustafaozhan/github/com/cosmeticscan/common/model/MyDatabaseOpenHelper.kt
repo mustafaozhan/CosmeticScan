@@ -79,12 +79,7 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         }
     }
 
-    fun allTasks() = use {
-        select(TABLE_NAME)
-                .exec {
-                    parseList(parser)
-                }
-    }
+
 
 
     fun searchInDatabase(fromCamera: String, alreadyHave: String): String? {
@@ -97,7 +92,7 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         }
         for (i in 0..tempList.size - 1)
             if (fromCamera.contains(tempList[i], ignoreCase = true) && !alreadyHave.contains(tempList[i]))
-                result = result + " " + tempList[i]
+                result = tempList[i] + "," + result
         return (result + alreadyHave)
     }
 }

@@ -23,11 +23,12 @@
             android:layout_centerVertical="true" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/txtScan"
-            android:layout_width="wrap_content"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
