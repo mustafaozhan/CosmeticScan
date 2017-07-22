@@ -97,20 +97,36 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
     fun getIngredientsByName(names: List<String>): ArrayList<Ingredient> {
 
 
-        val resultList= ArrayList<Ingredient>()
+        val resultList = ArrayList<Ingredient>()
         val tempList = use {
             select(TABLE_NAME)
                     .exec { parseList(parser) }
 
         }
 
-      for (i in 0..names.size-1)
-          for (j in 0..tempList.size-1)
-              if (names[i].equals(tempList[j].name.toString(),ignoreCase = true))
-                  resultList.add(tempList[j])
+        for (i in 0..names.size - 1)
+            for (j in 0..tempList.size - 1)
+                if (names[i].equals(tempList[j].name.toString(), ignoreCase = true))
+                    resultList.add(tempList[j])
 
         return resultList
 
+    }
+
+    fun getMatchByName(text: String?): ArrayList<Ingredient>? {
+
+        val resultList = ArrayList<Ingredient>()
+        val tempList = use {
+            select(TABLE_NAME)
+                    .exec { parseList(parser) }
+
+        }
+
+        for (i in 0..tempList.size - 1)
+            if (tempList[i].name!!.contains(text.toString(), ignoreCase = true))
+                resultList.add(tempList[i])
+
+        return resultList
     }
 }
 

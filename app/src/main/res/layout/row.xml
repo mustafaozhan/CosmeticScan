@@ -30,7 +30,7 @@
                 android:layout_toLeftOf="@+id/txtRating"
                 android:layout_toStartOf="@+id/txtRating"
                 android:text="Ingredient"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textSize="16sp"/>
 
             <TextView
                 android:gravity="end"
@@ -43,7 +43,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:text="Rating"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textSize="16sp"/>
 
             <TextView
                android:paddingTop="5sp"
@@ -53,7 +53,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/txtName"
-
+                android:textSize="15sp"
                 android:text="Information"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
@@ -62,7 +62,7 @@
                 android:id="@+id/txtCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:textSize="12sp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/txtInformation"

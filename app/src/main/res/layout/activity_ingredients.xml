@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recyclerViewIngredients"
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:layout_editor_absoluteX="8dp"

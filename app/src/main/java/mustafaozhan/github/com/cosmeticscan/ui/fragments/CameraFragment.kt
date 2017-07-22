@@ -155,8 +155,15 @@ class CameraFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+     //   cameraSource.stop()
+     //  activity.windowManager.removeView(surfaceView)
+
+    }
     override fun onResume() {
         super.onResume()
         txtScan.text = ""
+   //  activity.windowManager.addView(surfaceView, null)
     }
 }
