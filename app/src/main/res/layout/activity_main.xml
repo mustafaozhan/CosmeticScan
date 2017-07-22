@@ -15,9 +15,9 @@
             android:background="?attr/colorPrimary"
             app:elevation="0dp"
 
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <!--app:layout_scrollFlags="scroll|enterAlways"-->
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"

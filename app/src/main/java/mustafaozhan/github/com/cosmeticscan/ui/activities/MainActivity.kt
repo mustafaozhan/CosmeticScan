@@ -24,7 +24,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "databaseUrl"
+    private val URL = "dataUrl"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val settings = getSharedPreferences("firstTime", 0)
-        var firsTime = settings.getBoolean("firstTime", true)
+        val firsTime = settings.getBoolean("firstTime", true)
 
         if (firsTime)
             doAsync {

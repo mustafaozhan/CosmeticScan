@@ -58,12 +58,13 @@ class ManualFragment : Fragment() {
                 .subscribe({
                     text ->
 
-                   val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
-                    val adapter = ingredientList?.let { IngredientAdapter(it) }
-                    recyclerViewSearch.adapter = adapter
-                    adapter?.notifyDataSetChanged()
+                    activity.runOnUiThread {
+                        val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
+                        val adapter = ingredientList?.let { IngredientAdapter(it) }
+                        recyclerViewSearch.adapter = adapter
+                        adapter?.notifyDataSetChanged()
 
-
+                    }
 
                 })
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_ingredients.*
 import mustafaozhan.github.com.cosmeticscan.R
@@ -19,6 +20,7 @@ class IngredientsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients)
 
+        progressBarIngredient.progress
         val extras = intent.extras
 
         var data = extras.getString("data")
@@ -28,6 +30,9 @@ class IngredientsActivity : AppCompatActivity() {
         data = data.substring(0, data.length - 1)
 
         val names = data.split(",")
+
+
+
         val ingredientList = database.getIngredientsByName(names)
 
 
@@ -37,6 +42,7 @@ class IngredientsActivity : AppCompatActivity() {
         val adapter = IngredientAdapter(ingredientList)
 
         recyclerViewIngredients.adapter = adapter
+        progressBarIngredient.visibility = View.GONE
     }
 
 

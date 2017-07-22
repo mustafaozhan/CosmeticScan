@@ -26,9 +26,9 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
 
 
         @Synchronized
-        fun getInstance(ctx: Context): MyDatabaseOpenHelper {
+        fun getInstance(ctx: Context?): MyDatabaseOpenHelper {
             if (instance == null) {
-                instance = MyDatabaseOpenHelper(ctx.applicationContext)
+                instance = ctx?.applicationContext?.let { MyDatabaseOpenHelper(it) }
             }
             return instance!!
         }

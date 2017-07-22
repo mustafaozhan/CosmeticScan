@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.annotation.UiThread
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -25,14 +26,12 @@ import java.util.concurrent.TimeUnit
 class CameraFragment : Fragment() {
 
 
-
-
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
-        activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
 
 
@@ -56,20 +55,22 @@ class CameraFragment : Fragment() {
         val textRecognizer = TextRecognizer.Builder(activity).build()
 
         txtScan.setOnClickListener {
-            val intent = Intent(context, IngredientsActivity::class.java)
-            intent.putExtra("data", txtScan.text)
-            startActivity(intent)
+            if (txtScan.text.toString().length > 1) {
+                val intent = Intent(context, IngredientsActivity::class.java)
+                intent.putExtra("data", txtScan.text)
+                startActivity(intent)
+            }
         }
 
 
-
+        btnRefresh.setOnClickListener { txtScan.text = "" }
         if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
 
             cameraSource = CameraSource.Builder(activity, textRecognizer)
                     .setFacing(CameraSource.CAMERA_FACING_BACK)
-                    .setRequestedPreviewSize(1280, 1024)
+                    //  .setRequestedPreviewSize(1280, 1324)
                     .setRequestedFps(2.0f)
                     .setAutoFocusEnabled(true)
                     .build()
@@ -124,7 +125,12 @@ class CameraFragment : Fragment() {
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe({
                                         text ->
-                                        txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
+
+                                          activity.runOnUiThread {
+                                              txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
+                                          }
+
+
                                     })
 
 
@@ -157,13 +163,15 @@ class CameraFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-     //   cameraSource.stop()
-     //  activity.windowManager.removeView(surfaceView)
+        //   cameraSource.stop()
+
 
     }
+
     override fun onResume() {
         super.onResume()
         txtScan.text = ""
-   //  activity.windowManager.addView(surfaceView, null)
+        //   cameraSource.start(surfaceView.holder)
+        //  activity.windowManager.addView(surfaceView, null)
     }
 }
