@@ -1,35 +1,40 @@
 package mustafaozhan.github.com.cosmeticscan.ui.activities
 
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.widget.LinearLayout
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.common.model.database
 import mustafaozhan.github.com.cosmeticscan.ui.adapters.IngredientAdapter
-import org.jetbrains.anko.db.parseList
-import org.jetbrains.anko.db.rowParser
-import org.jetbrains.anko.db.select
-import java.util.*
+
 
 class IngredientsActivity : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients)
 
         val extras = intent.extras
 
-        val data = extras.getString("data")
+        var data = extras.getString("data")
 
 
         //getting recyclerview from xml
         val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
 
+        data = data.substring(0, data.length - 1)
         //adding a layoutmanager
+
+        val names = data.split(",")
+        val ingredientList=database.getIngredientsByName(names)
+
+
+
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
 //        val parser = rowParser {
@@ -58,10 +63,10 @@ class IngredientsActivity : AppCompatActivity() {
 
 
         //creating our adapter
-       // val adapter = IngredientAdapter(ingredientList)
+        val adapter = IngredientAdapter(ingredientList)
 
         //now adding the adapter to recyclerview
-      //  recyclerView.adapter = adapter
+        recyclerView.adapter = adapter
     }
 
 

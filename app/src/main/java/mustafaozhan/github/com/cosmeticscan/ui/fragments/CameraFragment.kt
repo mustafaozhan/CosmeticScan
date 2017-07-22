@@ -24,11 +24,7 @@ import java.util.concurrent.TimeUnit
 
 class CameraFragment : Fragment() {
 
-    val RED = "#FF1744"
-    val ORANGE = "#FF3D00"
-    val YELLOW = "#FFEA00"
-    val BLUE = "#2979FF"
-    val GREEN = "#00E676"
+
 
 
     internal lateinit var cameraSource: CameraSource
