@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="3sp"
-        android:layout_margin="1sp">
+        android:layout_margin="1sp"
+        app:cardCornerRadius="3sp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="3sp"
             android:paddingLeft="3sp"
             android:paddingRight="3sp"
-            android:paddingTop="3sp"
-            android:paddingBottom="3sp"
-            android:orientation="vertical">
+            android:paddingTop="3sp">
 
             <TextView
                 android:id="@+id/txtName"
@@ -32,44 +32,44 @@
                 android:layout_toLeftOf="@+id/txtRating"
                 android:layout_toStartOf="@+id/txtRating"
 
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
-                android:gravity="end"
                 android:id="@+id/txtRating"
                 android:layout_width="90sp"
                 android:layout_height="wrap_content"
-
                 android:layout_above="@+id/txtInformation"
+
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:gravity="end"
 
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
-               android:paddingTop="3sp"
                 android:id="@+id/txtInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/txtName"
-                android:textSize="13sp"
+                android:paddingTop="3sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
 
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:textSize="13sp" />
 
             <TextView
-                android:paddingTop="3sp"
                 android:id="@+id/txtCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/txtInformation"
+                android:paddingTop="3sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
 
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:textSize="12sp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

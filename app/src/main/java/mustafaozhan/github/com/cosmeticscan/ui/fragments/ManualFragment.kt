@@ -34,7 +34,7 @@ class ManualFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-
+        progressBarManual.visibility = View.GONE
 
 
 
@@ -59,17 +59,24 @@ class ManualFragment : Fragment() {
                     text ->
 
 
-                    doAsync {
-                        val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
-                        activity.runOnUiThread {
+                    if (text.isNotEmpty()) {
+                        progressBarManual.progress
+                        doAsync {
 
-                            val adapter = ingredientList?.let { IngredientAdapter(it) }
-                            recyclerViewSearch.adapter = adapter
-                            adapter?.notifyDataSetChanged()
+                            val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
 
+
+
+                            activity.runOnUiThread {
+
+                                val adapter = ingredientList?.let { IngredientAdapter(it) }
+                                recyclerViewSearch.adapter = adapter
+                                adapter?.notifyDataSetChanged()
+                                progressBarManual.visibility = View.GONE
+
+                            }
                         }
                     }
-
                 })
 
 

@@ -24,15 +24,27 @@
                 android:gravity="center"
                 android:hint="@string/search" />
 
+
         </RelativeLayout>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewSearch"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rLayoutSearch"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/rLayoutSearch">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true" />
+
+            <ProgressBar
+                android:id="@+id/progressBarManual"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
     </RelativeLayout>
 
 

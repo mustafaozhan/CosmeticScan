@@ -1,6 +1,9 @@
 package mustafaozhan.github.com.cosmeticscan.ui.activities
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -17,6 +20,7 @@ import mustafaozhan.github.com.cosmeticscan.ui.fragments.ManualFragment
 import mustafaozhan.github.com.cosmeticscan.utils.HttpHandler
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
 
         setSupportActionBar(toolbar)
-        setupViewPager(viewpager)
-        tabs.setupWithViewPager(viewpager)
+           setupViewPager(viewpager)
+          tabs.setupWithViewPager(viewpager)
 
 
         val settings = getSharedPreferences("firstTime", 0)
@@ -78,6 +82,9 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+
+
+
 
 
 }
