@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit
 
 
 class CameraFragment : Fragment() {
-
-
+    var data: String? = null
+    var counter = 0
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
@@ -52,18 +52,23 @@ class CameraFragment : Fragment() {
 
     private fun init() {
 
+
         val textRecognizer = TextRecognizer.Builder(activity).build()
 
         txtScan.setOnClickListener {
             if (txtScan.text.toString().length > 1) {
                 val intent = Intent(context, IngredientsActivity::class.java)
-                intent.putExtra("data", txtScan.text)
+                intent.putExtra("data", data)
                 startActivity(intent)
             }
         }
 
 
-        btnRefresh.setOnClickListener { txtScan.text = "" }
+        btnRefresh.setOnClickListener {
+            txtScan.text = ""
+            data = null
+            counter = 0
+        }
         if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
@@ -130,7 +135,11 @@ class CameraFragment : Fragment() {
                                             val temp = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
 
                                             activity.runOnUiThread {
-                                                txtScan.text = temp
+
+                                                data = temp
+                                                counter = (0..temp!!.length - 1).count { temp[it] == ',' }
+                                                if (counter != 0)
+                                                    txtScan.text = "We found $counter ingredient(s) click for details"
                                             }
                                         }
 
@@ -175,6 +184,8 @@ class CameraFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         txtScan.text = ""
+        data = null
+        counter = 0
         //   cameraSource.start(surfaceView.holder)
         //  activity.windowManager.addView(surfaceView, null)
     }
