@@ -64,24 +64,24 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-
-            R.id.settings ->
-                return true
-
-            else -> {
-            }
-        }
-
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        val inflater = menuInflater
+//        inflater.inflate(R.menu.menu, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//
+//            R.id.settings ->
+//                return true
+//
+//            else -> {
+//            }
+//        }
+//
+//        return true
+//    }
 
 
 

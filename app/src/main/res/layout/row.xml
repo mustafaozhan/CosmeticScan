@@ -9,17 +9,17 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp"
+        android:layout_margin="2sp"
         app:cardCornerRadius="5sp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="5sp"
+            android:paddingBottom="3sp"
             android:paddingLeft="5sp"
             android:paddingRight="5sp"
-            android:paddingTop="5sp">
+            android:paddingTop="3sp">
 
             <TextView
                 android:id="@+id/txtName"

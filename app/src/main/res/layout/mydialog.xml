@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/rLayoutContentDialog"
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="300sp"
         android:layout_alignParentTop="true">
 
         <TextView
@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:textSize="20sp"
+            android:paddingLeft="10sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
           android:textSize="18sp"
+            android:paddingRight="10sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -32,6 +34,8 @@
             android:id="@+id/txtDialogInformation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
             android:textSize="16sp"
             android:layout_below="@+id/txtDialogName"
             android:layout_alignParentLeft="true"
@@ -41,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         android:textSize="15sp"
+            android:paddingLeft="10sp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -51,20 +56,25 @@
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+       android:paddingTop="15sp"
         android:layout_below="@+id/rLayoutContentDialog"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <Button
+            style="?attr/borderlessButtonStyle"
             android:id="@+id/btnDialogTranslate"
             android:layout_width="wrap_content"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="Translate" />
 
 
         <Button
+            style="?attr/borderlessButtonStyle"
             android:id="@+id/btnDialogOk"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
