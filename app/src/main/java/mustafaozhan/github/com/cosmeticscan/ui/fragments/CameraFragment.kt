@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.annotation.UiThread
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -17,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
 import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
+import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import java.io.IOException
@@ -126,9 +126,13 @@ class CameraFragment : Fragment() {
                                     .subscribe({
                                         text ->
 
-                                          activity.runOnUiThread {
-                                              txtScan.text = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
-                                          }
+                                        doAsync {
+                                            val temp = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
+
+                                            activity.runOnUiThread {
+                                                txtScan.text = temp
+                                            }
+                                        }
 
 
                                     })
@@ -163,7 +167,7 @@ class CameraFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        //   cameraSource.stop()
+//           cameraSource.stop()
 
 
     }

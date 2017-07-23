@@ -1,9 +1,6 @@
 package mustafaozhan.github.com.cosmeticscan.ui.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -14,12 +11,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.common.model.database
+import mustafaozhan.github.com.cosmeticscan.ui.adapters.MyViewPagerAdapter
 import mustafaozhan.github.com.cosmeticscan.ui.fragments.CameraFragment
 import mustafaozhan.github.com.cosmeticscan.ui.fragments.ManualFragment
 import mustafaozhan.github.com.cosmeticscan.utils.HttpHandler
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
 
         setSupportActionBar(toolbar)
-           setupViewPager(viewpager)
-          tabs.setupWithViewPager(viewpager)
+        setupViewPager(viewpager)
+        tabs.setupWithViewPager(viewpager)
 
 
         val settings = getSharedPreferences("firstTime", 0)
@@ -56,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = ViewPagerAdapter(supportFragmentManager)
+        val adapter = MyViewPagerAdapter(supportFragmentManager)
         adapter.addFrag(CameraFragment(), resources.getString(R.string.camera))
         adapter.addFrag(ManualFragment(), resources.getString(R.string.manual))
 
@@ -80,30 +77,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         return true
-    }
-
-
-    private inner class ViewPagerAdapter internal constructor(manager: FragmentManager) : FragmentPagerAdapter(manager) {
-        private val mFragmentList = ArrayList<Fragment>()
-        private val mFragmentTitleList = ArrayList<String>()
-
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList[position]
-        }
-
-        override fun getCount(): Int {
-            return mFragmentList.size
-        }
-
-        internal fun addFrag(fragment: Fragment, title: String) {
-            mFragmentList.add(fragment)
-            mFragmentTitleList.add(title)
-        }
-
-        override fun getPageTitle(position: Int): CharSequence {
-            return mFragmentTitleList[position]
-
-        }
     }
 
 

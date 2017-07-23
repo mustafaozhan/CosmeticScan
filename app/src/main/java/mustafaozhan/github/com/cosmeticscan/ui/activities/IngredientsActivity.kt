@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_ingredients.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.common.model.database
 import mustafaozhan.github.com.cosmeticscan.ui.adapters.IngredientAdapter
+import org.jetbrains.anko.doAsync
 
 
 class IngredientsActivity : AppCompatActivity() {
@@ -32,17 +33,19 @@ class IngredientsActivity : AppCompatActivity() {
         val names = data.split(",")
 
 
+        doAsync {
+            val ingredientList = database.getIngredientsByName(names)
 
-        val ingredientList = database.getIngredientsByName(names)
 
+            runOnUiThread {
+                recyclerViewIngredients.layoutManager = LinearLayoutManager(applicationContext, LinearLayout.VERTICAL, false)
 
+                val adapter = IngredientAdapter(ingredientList)
 
-        recyclerViewIngredients.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-
-        val adapter = IngredientAdapter(ingredientList)
-
-        recyclerViewIngredients.adapter = adapter
-        progressBarIngredient.visibility = View.GONE
+                recyclerViewIngredients.adapter = adapter
+                progressBarIngredient.visibility = View.GONE
+            }
+        }
     }
 
 

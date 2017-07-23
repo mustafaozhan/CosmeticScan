@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_manual.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
 import mustafaozhan.github.com.cosmeticscan.ui.adapters.IngredientAdapter
+import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
@@ -58,12 +58,16 @@ class ManualFragment : Fragment() {
                 .subscribe({
                     text ->
 
-                    activity.runOnUiThread {
-                        val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
-                        val adapter = ingredientList?.let { IngredientAdapter(it) }
-                        recyclerViewSearch.adapter = adapter
-                        adapter?.notifyDataSetChanged()
 
+                    doAsync {
+                        val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
+                        activity.runOnUiThread {
+
+                            val adapter = ingredientList?.let { IngredientAdapter(it) }
+                            recyclerViewSearch.adapter = adapter
+                            adapter?.notifyDataSetChanged()
+
+                        }
                     }
 
                 })
