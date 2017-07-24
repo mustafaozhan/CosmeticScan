@@ -25,18 +25,15 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "dataUrl"
+    private val URL = "databaseUrl"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         setSupportActionBar(toolbar)
            setupViewPager(viewpager)
           tabs.setupWithViewPager(viewpager)
-
 
         val settings = getSharedPreferences("firstTime", 0)
         val firsTime = settings.getBoolean("firstTime", true)
@@ -54,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
             }
     }
-
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = MyViewPagerAdapter(supportFragmentManager)

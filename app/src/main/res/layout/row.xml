@@ -33,7 +33,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/txtRating"
                 android:layout_toStartOf="@+id/txtRating"
-                android:textSize="16sp"
+                android:textSize="18sp"
  />
 
             <TextView
@@ -42,7 +42,7 @@
                 android:paddingRight="2sp"
                 android:layout_height="wrap_content"
                 android:paddingTop="2sp"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:paddingBottom="2sp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"

@@ -23,25 +23,15 @@ class IngredientsActivity : AppCompatActivity() {
 
         progressBarIngredient.progress
         val extras = intent.extras
-
         var data = extras.getString("data")
-
-
-
         data = data.substring(0, data.length - 1)
 
         val names = data.split(",")
-
-
         doAsync {
             val ingredientList = database.getIngredientsByName(names)
-
-
             runOnUiThread {
                 recyclerViewIngredients.layoutManager = LinearLayoutManager(applicationContext, LinearLayout.VERTICAL, false)
-
                 val adapter = IngredientAdapter(ingredientList)
-
                 recyclerViewIngredients.adapter = adapter
                 progressBarIngredient.visibility = View.GONE
             }
