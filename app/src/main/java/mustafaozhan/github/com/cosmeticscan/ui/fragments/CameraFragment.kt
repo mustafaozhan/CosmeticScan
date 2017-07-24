@@ -35,6 +35,7 @@ class CameraFragment : Fragment() {
 
 
 
+
         return fragmentView
     }
 
@@ -176,6 +177,7 @@ class CameraFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+
 //           cameraSource.stop()
 
 
@@ -186,6 +188,8 @@ class CameraFragment : Fragment() {
         txtScan.text = ""
         data = null
         counter = 0
+
+
         //   cameraSource.start(surfaceView.holder)
         //  activity.windowManager.addView(surfaceView, null)
     }

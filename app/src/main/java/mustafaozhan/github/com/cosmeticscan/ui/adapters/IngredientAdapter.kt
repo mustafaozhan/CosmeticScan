@@ -66,7 +66,7 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
                 dialog.txtDialogName.text = ingredient.name
                 dialog.txtDialogRating.text = ingredient.rating
                 dialog.txtDialogInformation.text = ingredient.information
-                dialog.txtDialogCategories.text = "Catagories: "+ingredient.category
+                dialog.txtDialogCategories.text = "Catagories: " + ingredient.category
 
                 when (dialog.txtDialogRating.text) {
                     "Best" -> dialog.txtDialogRating.setTextColor(Color.parseColor(BLUE))

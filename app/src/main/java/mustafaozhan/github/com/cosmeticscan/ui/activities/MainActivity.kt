@@ -3,6 +3,7 @@ package mustafaozhan.github.com.cosmeticscan.ui.activities
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
@@ -52,6 +53,23 @@ class MainActivity : AppCompatActivity() {
         adapter.addFrag(ManualFragment(), resources.getString(R.string.manual))
 
         viewPager.adapter = adapter
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+//                Log.d("Scroll state changed","Fragment $state")
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                //       Log.d("Scrolled","Fragment $position")
+            }
+
+            override fun onPageSelected(position: Int) {
+                Log.d("Selected", "Fragment $position")
+
+
+            }
+        })
+
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {

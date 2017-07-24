@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="mustafaozhan.github.com.cosmeticscan.ui.fragments.CameraFragment">
 
     <RelativeLayout
@@ -43,9 +44,9 @@
                 android:id="@+id/txtScan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
 
                 android:layout_toLeftOf="@+id/btnRefresh"
                 android:layout_toStartOf="@+id/btnRefresh"
@@ -55,14 +56,14 @@
 
             <Button
                 android:id="@+id/btnRefresh"
-                android:layout_centerVertical="true"
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/refresh"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:text="@string/refresh" />
         </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>

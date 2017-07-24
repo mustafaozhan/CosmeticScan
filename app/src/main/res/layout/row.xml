@@ -23,9 +23,6 @@
 
             <TextView
                 android:id="@+id/txtName"
-                android:paddingBottom="2sp"
-                android:paddingTop="2sp"
-                android:paddingLeft="2sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -33,21 +30,23 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/txtRating"
                 android:layout_toStartOf="@+id/txtRating"
-                android:textSize="18sp"
- />
+                android:paddingBottom="2sp"
+                android:paddingLeft="2sp"
+                android:paddingTop="2sp"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtRating"
                 android:layout_width="90sp"
-                android:paddingRight="2sp"
                 android:layout_height="wrap_content"
-                android:paddingTop="2sp"
-                android:textSize="18sp"
-                android:paddingBottom="2sp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:gravity="end" />
+                android:gravity="end"
+                android:paddingBottom="2sp"
+                android:paddingRight="2sp"
+                android:paddingTop="2sp"
+                android:textSize="18sp" />
 
 
         </RelativeLayout>

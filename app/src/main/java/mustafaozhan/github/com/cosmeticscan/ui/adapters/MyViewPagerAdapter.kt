@@ -3,7 +3,6 @@ package mustafaozhan.github.com.cosmeticscan.ui.adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import java.util.*
 
 /**
@@ -33,8 +32,6 @@ class MyViewPagerAdapter internal constructor(manager: FragmentManager) : Fragme
         return mFragmentTitleList[position]
 
     }
-
-
 
 
 }

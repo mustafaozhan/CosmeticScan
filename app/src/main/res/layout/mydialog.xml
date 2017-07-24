@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="10sp"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10sp">
 
     <RelativeLayout
         android:id="@+id/rLayoutContentDialog"
@@ -15,40 +15,43 @@
             android:id="@+id/txtDialogName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:textSize="20sp"
-            android:paddingLeft="10sp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="10sp"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/txtDialogRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          android:textSize="18sp"
-            android:paddingRight="10sp"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentTop="true"
+            android:paddingRight="10sp"
+            android:textSize="18sp" />
+
         <TextView
-            android:paddingTop="20sp"
             android:id="@+id/txtDialogInformation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtDialogName"
             android:paddingLeft="10sp"
             android:paddingRight="10sp"
-            android:textSize="16sp"
-            android:layout_below="@+id/txtDialogName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:paddingTop="20sp"
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/txtDialogCategories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-        android:textSize="15sp"
-            android:paddingLeft="10sp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10sp"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
@@ -56,28 +59,28 @@
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:paddingTop="15sp"
-        android:layout_below="@+id/rLayoutContentDialog"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rLayoutContentDialog"
+        android:paddingTop="15sp">
 
         <Button
-            style="?attr/borderlessButtonStyle"
             android:id="@+id/btnDialogTranslate"
+            style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="Translate" />
+            android:text="Translate"
+            android:textColor="@color/white" />
 
 
         <Button
-            style="?attr/borderlessButtonStyle"
             android:id="@+id/btnDialogOk"
-            android:textColor="@color/white"
+            style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="OK" />
+            android:text="OK"
+            android:textColor="@color/white" />
     </RelativeLayout>
 </RelativeLayout>
