@@ -3,17 +3,20 @@ package mustafaozhan.github.com.cosmeticscan.ui.adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import java.util.*
 
 /**
 Created by Mustafa Özhan on 7/23/17 at 1:51 PM on Linux <3.
 
  */
-class MyViewPagerAdapter internal constructor(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+class MyViewPagerAdapter internal constructor(manager: FragmentManager) : FragmentPagerAdapter(manager),ViewPager.OnPageChangeListener {
 
 
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
+
+    private var lastSelectedPagePosition = 0
 
     override fun getItem(position: Int): Fragment {
         return mFragmentList[position]
@@ -32,6 +35,32 @@ class MyViewPagerAdapter internal constructor(manager: FragmentManager) : Fragme
         return mFragmentTitleList[position]
 
     }
+    override fun onPageScrollStateChanged(state: Int) {
+//                Log.d("Scroll state changed","Fragment $state")
+    }
 
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        //       Log.d("Scrolled","Fragment $position")
+    }
+
+    override fun onPageSelected(position: Int) {
+
+
+        if (lastSelectedPagePosition != -1 && mFragmentList[lastSelectedPagePosition] is OnPagePositionChangeListener) {
+
+            (mFragmentList[lastSelectedPagePosition] as OnPagePositionChangeListener).onPagePositionChange(position)
+        }
+
+        if (mFragmentList[position] is OnPagePositionChangeListener) {
+
+            (mFragmentList[position] as OnPagePositionChangeListener).onPagePositionChange(position)
+        }
+
+        lastSelectedPagePosition = position
+    }
+
+    interface OnPagePositionChangeListener {
+        fun onPagePositionChange(active:Int)
+    }
 
 }

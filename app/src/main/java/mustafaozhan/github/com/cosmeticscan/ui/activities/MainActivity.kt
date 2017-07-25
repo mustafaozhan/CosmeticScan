@@ -20,7 +20,7 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "databaseUrl"
+    private val URL = "https://firebasestorage.googleapis.com/v0/b/howl-159917.appspot.com/o/CosmeticScan?alt=media&token=c419fa57-2bbf-4911-9a61-40985b8c29d4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         if (firsTime)
             doAsync {
                 val jsonStr = HttpHandler().makeServiceCall(URL)
-                val gson = Gson()
-                val response = gson.fromJson<List<Ingredient>>(jsonStr)
+                val myGSon = Gson()
+                val response = myGSon.fromJson<List<Ingredient>>(jsonStr)
 
                 uiThread {
                     database.insertIngredientList(response)
@@ -54,21 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.adapter = adapter
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-//                Log.d("Scroll state changed","Fragment $state")
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                //       Log.d("Scrolled","Fragment $position")
-            }
-
-            override fun onPageSelected(position: Int) {
-                Log.d("Selected", "Fragment $position")
-
-
-            }
-        })
+        viewPager.addOnPageChangeListener(adapter)
 
     }
 

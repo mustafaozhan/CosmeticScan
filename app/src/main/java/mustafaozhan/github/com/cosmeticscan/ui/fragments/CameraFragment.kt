@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
 import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
+import mustafaozhan.github.com.cosmeticscan.ui.adapters.MyViewPagerAdapter
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -23,18 +24,18 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
-class CameraFragment : Fragment() {
+class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListener, SurfaceHolder.Callback, View.OnClickListener {
+
+
     var data: String? = null
     var counter = 0
+    internal lateinit var textRecognizer: TextRecognizer
     internal lateinit var cameraSource: CameraSource
     internal val RequestCameraPermissionID = 1001
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-
-
-
 
         return fragmentView
     }
@@ -43,33 +44,14 @@ class CameraFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mProgressBar.progress
-
-
-
-
-
+        surfaceView.holder.addCallback(this)
         init()
+        setRecognition()
+
+
     }
 
-    private fun init() {
-
-
-        val textRecognizer = TextRecognizer.Builder(activity).build()
-
-        txtScan.setOnClickListener {
-            if (txtScan.text.toString().length > 1) {
-                val intent = Intent(context, IngredientsActivity::class.java)
-                intent.putExtra("data", data)
-                startActivity(intent)
-            }
-        }
-
-
-        btnRefresh.setOnClickListener {
-            txtScan.text = ""
-            data = null
-            counter = 0
-        }
+    private fun setRecognition() {
         if (!textRecognizer.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
@@ -80,32 +62,8 @@ class CameraFragment : Fragment() {
                     .setRequestedFps(2.0f)
                     .setAutoFocusEnabled(true)
                     .build()
-            surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
-                override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
-                    try {
-                        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-                            ActivityCompat.requestPermissions(activity,
-                                    arrayOf(Manifest.permission.CAMERA),
-                                    RequestCameraPermissionID)
-                            return
-                        }
-                        cameraSource.start(surfaceView.holder)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-
-                }
-
-                override fun surfaceChanged(surfaceHolder: SurfaceHolder, i: Int, i1: Int, i2: Int) {
-
-                }
-
-                override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
-                    cameraSource.stop()
-                }
-            })
 
             textRecognizer.setProcessor(object : Detector.Processor<TextBlock> {
                 override fun release() {
@@ -153,9 +111,69 @@ class CameraFragment : Fragment() {
                 }
             })
         }
+    }
+
+    private fun init() {
+        btnRefresh.setOnClickListener(this)
+        txtScan.setOnClickListener(this)
+        textRecognizer = TextRecognizer.Builder(activity).build()
+    }
+
+    override fun onClick(view: View?) {
+        when (view) {
+
+            txtScan -> {
+                if (txtScan.text.toString().length > 1) {
+                    val intent = Intent(context, IngredientsActivity::class.java)
+                    intent.putExtra("data", data)
+                    startActivity(intent)
+                }
+            }
+            btnRefresh -> {
+                txtScan.text = ""
+                data = null
+                counter = 0
+            }
+        }
+
 
     }
 
+    override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
+
+        try {
+            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(activity,
+                        arrayOf(Manifest.permission.CAMERA),
+                        RequestCameraPermissionID)
+                return
+            }
+            cameraSource.start(surfaceView.holder)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+    }
+
+    override fun surfaceChanged(surfaceHolder: SurfaceHolder, i: Int, i1: Int, i2: Int) {
+
+    }
+
+    override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
+        cameraSource.stop()
+    }
+
+    override fun onPagePositionChange(active: Int) {
+        Log.i("Page", "$active")
+
+//        if (active)
+//            cameraSource.start()
+//        else {
+//            cameraSource.stop()
+//
+//        }
+    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
@@ -175,13 +193,6 @@ class CameraFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-
-//           cameraSource.stop()
-
-
-    }
 
     override fun onResume() {
         super.onResume()
@@ -189,8 +200,5 @@ class CameraFragment : Fragment() {
         data = null
         counter = 0
 
-
-        //   cameraSource.start(surfaceView.holder)
-        //  activity.windowManager.addView(surfaceView, null)
     }
 }

@@ -23,12 +23,19 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         const val INFORMATION = "information"
         const val CATEGORY = "category"
         const val RATING = "rating"
+        var myList:List<String>?=null
 
 
         @Synchronized
         fun getInstance(ctx: Context?): MyDatabaseOpenHelper {
             if (instance == null) {
                 instance = ctx?.applicationContext?.let { MyDatabaseOpenHelper(it) }
+                myList = instance!!.use {
+                    select(TABLE_NAME)
+                            .column(NAME)
+                            .exec { parseList(StringParser) }
+
+                }
             }
             return instance!!
         }
@@ -82,15 +89,10 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
 
     fun searchInDatabase(fromCamera: String, alreadyHave: String): String? {
         var result: String = ""
-        val tempList = use {
-            select(TABLE_NAME)
-                    .column(NAME)
-                    .exec { parseList(StringParser) }
 
-        }
-        for (i in 0..tempList.size - 1)
-            if (fromCamera.contains(tempList[i], ignoreCase = true) && !alreadyHave.contains(tempList[i]))
-                result = tempList[i] + "," + result
+        for (i in 0..myList!!.size - 1)
+            if (fromCamera.contains(myList!![i], ignoreCase = true) && !alreadyHave.contains(myList!![i]))
+                result = myList!![i] + "," + result
         return (result + alreadyHave)
     }
 
