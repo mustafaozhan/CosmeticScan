@@ -20,7 +20,7 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "https://firebasestorage.googleapis.com/v0/b/howl-159917.appspot.com/o/CosmeticScan?alt=media&token=c419fa57-2bbf-4911-9a61-40985b8c29d4"
+    private val URL = "databaseURL"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -166,13 +166,16 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
     override fun onPagePositionChange(active: Int) {
         Log.i("Page", "$active")
+        when (active) {
+            0 -> {
+                cameraSource.start()
+            }
+            1 -> {
+                cameraSource.stop()
+            }
 
-//        if (active)
-//            cameraSource.start()
-//        else {
-//            cameraSource.stop()
-//
-//        }
+        }
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
