@@ -168,10 +168,10 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
         Log.i("Page", "$active")
         when (active) {
             0 -> {
-                cameraSource.start()
+//                cameraSource.start()
             }
             1 -> {
-                cameraSource.stop()
+//                cameraSource.stop()
             }
 
         }
