@@ -1,10 +1,7 @@
 package mustafaozhan.github.com.cosmeticscan.ui.fragments
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
@@ -20,7 +17,6 @@ import mustafaozhan.github.com.cosmeticscan.ui.adapters.MyViewPagerAdapter
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
@@ -31,7 +27,6 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     var counter = 0
     internal lateinit var textRecognizer: TextRecognizer
     internal lateinit var cameraSource: CameraSource
-    internal val RequestCameraPermissionID = 1001
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
@@ -141,18 +136,9 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
-        try {
-            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-                ActivityCompat.requestPermissions(activity,
-                        arrayOf(Manifest.permission.CAMERA),
-                        RequestCameraPermissionID)
-                return
-            }
-            cameraSource.start(surfaceView.holder)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        cameraSource.start(surfaceView.holder)
+
 
     }
 
@@ -176,24 +162,6 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
         }
 
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            RequestCameraPermissionID -> {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        return
-                    }
-                    try {
-                        cameraSource.start(surfaceView.holder)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-
-                }
-            }
-        }
     }
 
 
