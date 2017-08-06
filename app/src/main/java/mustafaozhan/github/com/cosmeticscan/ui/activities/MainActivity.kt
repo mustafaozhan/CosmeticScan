@@ -24,7 +24,7 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "databaseURL"
+    private val URL = "databaseUrl"
     companion object {
         val PERMISSIONS_REQUEST_CODE = 0
     }
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
