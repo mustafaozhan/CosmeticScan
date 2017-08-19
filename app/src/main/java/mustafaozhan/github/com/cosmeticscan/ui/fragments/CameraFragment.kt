@@ -20,7 +20,7 @@ import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 
-class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListener, SurfaceHolder.Callback, View.OnClickListener {
+class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener {
 
 
     var data: String? = null
@@ -149,21 +149,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
         cameraSource!!.stop()
     }
-
-    override fun onPagePositionChange(active: Int) {
-        Log.i("Page", "$active")
-        when (active) {
-            0 -> {
-//                cameraSource.start()
-            }
-            1 -> {
-//                cameraSource.stop()
-            }
-
-        }
-
-    }
-
+    
 
     override fun onResume() {
         super.onResume()
