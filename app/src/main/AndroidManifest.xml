@@ -16,7 +16,7 @@
             android:name=".ui.activities.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Design.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,7 @@
             android:name=".ui.activities.IngredientsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

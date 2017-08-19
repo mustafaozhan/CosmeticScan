@@ -25,8 +25,8 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
     var data: String? = null
     var counter = 0
-    internal lateinit var textRecognizer: TextRecognizer
-    internal lateinit var cameraSource: CameraSource
+    var textRecognizer: TextRecognizer ?= null
+    var cameraSource: CameraSource?=null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
@@ -47,7 +47,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     }
 
     private fun setRecognition() {
-        if (!textRecognizer.isOperational) {
+        if (!textRecognizer!!.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
 
@@ -60,7 +60,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
 
 
-            textRecognizer.setProcessor(object : Detector.Processor<TextBlock> {
+            textRecognizer!!.setProcessor(object : Detector.Processor<TextBlock> {
                 override fun release() {
 
                 }
@@ -137,7 +137,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
 
-        cameraSource.start(surfaceView.holder)
+        cameraSource!!.start(surfaceView.holder)
 
 
     }
@@ -147,7 +147,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     }
 
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
-        cameraSource.stop()
+        cameraSource!!.stop()
     }
 
     override fun onPagePositionChange(active: Int) {
