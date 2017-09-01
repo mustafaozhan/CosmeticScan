@@ -46,7 +46,21 @@ class MyViewPagerAdapter internal constructor(manager: FragmentManager) : Fragme
     override fun onPageSelected(position: Int) {
 
 
+        if (lastSelectedPagePosition != -1 && mFragmentList[lastSelectedPagePosition] is OnPagePositionChangeListener) {
+
+            (mFragmentList[lastSelectedPagePosition] as OnPagePositionChangeListener).onPagePositionChange(position)
+        }
+
+        if (mFragmentList[position] is OnPagePositionChangeListener) {
+
+            (mFragmentList[position] as OnPagePositionChangeListener).onPagePositionChange(position)
+        }
+
+        lastSelectedPagePosition = position
     }
 
+    interface OnPagePositionChangeListener {
+        fun onPagePositionChange(active:Int)
+    }
 
 }

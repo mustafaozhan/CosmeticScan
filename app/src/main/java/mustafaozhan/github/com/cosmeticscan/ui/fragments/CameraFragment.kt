@@ -20,7 +20,7 @@ import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 
-class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener {
+class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListener, SurfaceHolder.Callback, View.OnClickListener {
 
 
     var data: String? = null
@@ -38,8 +38,8 @@ class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mProgressBar.progress
-        surfaceView.holder.addCallback(this)
+
+
         init()
         setRecognition()
 
@@ -47,6 +47,7 @@ class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener
     }
 
     private fun setRecognition() {
+        mProgressBar.progress
         if (!textRecognizer!!.isOperational) {
             Log.w("MainActivity", "Detector dependencies are not yet available")
         } else {
@@ -110,6 +111,7 @@ class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener
 
     private fun init() {
         btnRefresh.setOnClickListener(this)
+        surfaceView.holder.addCallback(this)
         txtScan.setOnClickListener(this)
         textRecognizer = TextRecognizer.Builder(activity).build()
     }
@@ -137,7 +139,7 @@ class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
 
-        cameraSource!!.start(surfaceView.holder)
+        cameraSource?.start(surfaceView.holder)
 
 
     }
@@ -147,9 +149,23 @@ class CameraFragment : Fragment(),  SurfaceHolder.Callback, View.OnClickListener
     }
 
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
-        cameraSource!!.stop()
+        cameraSource?.stop()
     }
-    
+
+    override fun onPagePositionChange(active: Int) {
+        Log.i("Page", "$active")
+        when (active) {
+            0 -> {
+//                cameraSource.start()
+            }
+            1 -> {
+//                cameraSource.stop()
+            }
+
+        }
+
+    }
+
 
     override fun onResume() {
         super.onResume()
