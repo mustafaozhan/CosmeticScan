@@ -25,8 +25,8 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
     var data: String? = null
     var counter = 0
-    var textRecognizer: TextRecognizer ?= null
-    var cameraSource: CameraSource?=null
+    private var textRecognizer: TextRecognizer ?= null
+    private var cameraSource: CameraSource?=null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
