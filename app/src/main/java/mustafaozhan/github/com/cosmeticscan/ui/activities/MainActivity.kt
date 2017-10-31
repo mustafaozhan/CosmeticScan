@@ -63,27 +63,6 @@ class MainActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(adapter)
 
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.menu, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//
-//            R.id.settings ->
-//                return true
-//
-//            else -> {
-//            }
-//        }
-//
-//        return true
-//    }
-
-
     private fun checkPermissionsAndInit() {
         val permission = Manifest.permission.CAMERA
 
