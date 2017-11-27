@@ -6,5 +6,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="search">Search</string>
     <string name="refresh">Refresh</string>
+    <string name="translate">Translate</string>
+    <string name="ok">OK</string>
 
 </resources>

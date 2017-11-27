@@ -9,8 +9,7 @@ Created by Mustafa Özhan on 7/20/17 at 8:19 PM on Linux <3.
 
  */
 class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatabase", null, 1) {
-    val parser = rowParser {
-        id: Int, name: String, information: String, category: String, rating: String ->
+    private val parser = rowParser { id: Int, name: String, information: String, category: String, rating: String ->
         Ingredient(id, name, information, category, rating)
     }
 
@@ -23,7 +22,7 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         const val INFORMATION = "information"
         const val CATEGORY = "category"
         const val RATING = "rating"
-        var myList:List<String>?=null
+        var myList: List<String>? = null
 
 
         @Synchronized
@@ -58,23 +57,9 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         db.dropTable(TABLE_NAME, true)
     }
 
-    fun insertIngredient(ingredient: Ingredient) {
-        instance!!.use {
-
-            insert(
-                    TABLE_NAME,
-                    ID to ingredient.id,
-                    NAME to ingredient.name,
-                    INFORMATION to ingredient.information,
-                    CATEGORY to ingredient.category,
-                    RATING to ingredient.rating
-            )
-        }
-    }
-
     fun insertIngredientList(ingredientList: List<Ingredient>) {
         instance!!.use {
-            for (i in 0..ingredientList.size - 1)
+            for (i in 0 until ingredientList.size)
                 insert(
                         TABLE_NAME,
                         ID to ingredientList[i].id,
@@ -88,11 +73,12 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
 
 
     fun searchInDatabase(fromCamera: String, alreadyHave: String): String? {
-        var result: String = ""
+        var result = ""
 
-        for (i in 0..myList!!.size - 1)
-            if (fromCamera.contains(myList!![i], ignoreCase = true) && !alreadyHave.contains(myList!![i]))
-                result = myList!![i] + "," + result
+        (0 until myList!!.size)
+                .asSequence()
+                .filter { fromCamera.contains(myList!![it], ignoreCase = true) && !alreadyHave.contains(myList!![it]) }
+                .forEach { result = myList!![it] + "," + result }
         return (result + alreadyHave)
     }
 
@@ -106,10 +92,10 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
 
         }
 
-        for (i in 0..names.size - 1)
-            for (j in 0..tempList.size - 1)
-                if (names[i].equals(tempList[j].name.toString(), ignoreCase = true))
-                    resultList.add(tempList[j])
+        for (i in 0 until names.size)
+            (0 until tempList.size)
+                    .filter { names[i].equals(tempList[it].name.toString(), ignoreCase = true) }
+                    .mapTo(resultList) { tempList[it] }
 
         return resultList
 
@@ -124,9 +110,9 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
 
         }
 
-        for (i in 0..tempList.size - 1)
-            if (tempList[i].name!!.contains(text.toString(), ignoreCase = true))
-                resultList.add(tempList[i])
+        (0 until tempList.size)
+                .filter { tempList[it].name!!.contains(text.toString(), ignoreCase = true) }
+                .mapTo(resultList) { tempList[it] }
 
         return resultList
     }

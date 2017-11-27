@@ -24,16 +24,18 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
-    private val URL = "databaseUrl"
+
     companion object {
         val PERMISSIONS_REQUEST_CODE = 0
+        private val URL = "databaseUrl"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-       checkPermissionsAndInit()
+        checkPermissionsAndInit()
 
         val settings = getSharedPreferences("firstTime", 0)
         val firsTime = settings.getBoolean("firstTime", true)
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
                 uiThread {
                     database.insertIngredientList(response)
-                    settings.edit().putBoolean("firstTime", false).commit()
+                    settings.edit().putBoolean("firstTime", false).apply()
                 }
 
             }
@@ -63,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(adapter)
 
     }
+
     private fun checkPermissionsAndInit() {
         val permission = Manifest.permission.CAMERA
 
@@ -72,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf<String>(permission), PERMISSIONS_REQUEST_CODE)
+                ActivityCompat.requestPermissions(this, arrayOf(permission), PERMISSIONS_REQUEST_CODE)
             }
         } else {
             init() //opening filemanager fragment
@@ -82,15 +85,18 @@ class MainActivity : AppCompatActivity() {
     private fun showError() {
         val permission = Manifest.permission.CAMERA
         Toast.makeText(this, "Allow camera to read text", Toast.LENGTH_SHORT).show()
-        ActivityCompat.requestPermissions(this, arrayOf<String>(permission), PERMISSIONS_REQUEST_CODE)
+        ActivityCompat.requestPermissions(this, arrayOf(permission), PERMISSIONS_REQUEST_CODE)
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) { // geting result from permissinon request
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray
+    ) { // geting result from permissinon request
         when (requestCode) {
             PERMISSIONS_REQUEST_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     init()
                 } else {
                     showError()

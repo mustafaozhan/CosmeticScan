@@ -38,5 +38,4 @@ class IngredientsActivity : AppCompatActivity() {
         }
     }
 
-
 }

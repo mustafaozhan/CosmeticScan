@@ -10,7 +10,7 @@ import java.util.*
 Created by Mustafa Özhan on 7/23/17 at 1:51 PM on Linux <3.
 
  */
-class MyViewPagerAdapter internal constructor(manager: FragmentManager) : FragmentPagerAdapter(manager),ViewPager.OnPageChangeListener {
+class MyViewPagerAdapter internal constructor(manager: FragmentManager) : FragmentPagerAdapter(manager), ViewPager.OnPageChangeListener {
 
 
     private val mFragmentList = ArrayList<Fragment>()
@@ -35,6 +35,7 @@ class MyViewPagerAdapter internal constructor(manager: FragmentManager) : Fragme
         return mFragmentTitleList[position]
 
     }
+
     override fun onPageScrollStateChanged(state: Int) {
 //                Log.d("Scroll state changed","Fragment $state")
     }
@@ -60,7 +61,7 @@ class MyViewPagerAdapter internal constructor(manager: FragmentManager) : Fragme
     }
 
     interface OnPagePositionChangeListener {
-        fun onPagePositionChange(active:Int)
+        fun onPagePositionChange(active: Int)
     }
 
 }

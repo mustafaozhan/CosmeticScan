@@ -1,5 +1,6 @@
 package mustafaozhan.github.com.cosmeticscan.ui.adapters
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -21,7 +22,7 @@ import java.util.*
 Created by Mustafa Özhan on 7/14/17 at 2:45 PM on Linux.
 
  */
-class IngredientAdapter(val ingredientList: List<Ingredient>) :
+class IngredientAdapter(private val ingredientList: List<Ingredient>) :
         RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,21 +38,22 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        @SuppressLint("SetTextI18n")
         fun bindForecast(ingredient: Ingredient) {
-            val RED = "#FF1744"
-            val YELLOW = "#FFEA00"
-            val BLUE = "#2979FF"
-            val GREEN = "#00E676"
+            val red = "#FF1744"
+            val yellow = "#FFEA00"
+            val blue = "#2979FF"
+            val green = "#00E676"
             itemView.txtName.text = ingredient.name
 //            itemView.txtInformation.text = ingredient.information
 //            itemView.txtCategory.text = "Category: " + ingredient.category
             itemView.txtRating.text = ingredient.rating
 
             when (itemView.txtRating.text) {
-                "Best" -> itemView.txtRating.setTextColor(Color.parseColor(BLUE))
-                "Good" -> itemView.txtRating.setTextColor(Color.parseColor((GREEN)))
-                "Average" -> itemView.txtRating.setTextColor(Color.parseColor(YELLOW))
-                "Poor" -> itemView.txtRating.setTextColor(Color.parseColor(RED))
+                "Best" -> itemView.txtRating.setTextColor(Color.parseColor(blue))
+                "Good" -> itemView.txtRating.setTextColor(Color.parseColor((green)))
+                "Average" -> itemView.txtRating.setTextColor(Color.parseColor(yellow))
+                "Poor" -> itemView.txtRating.setTextColor(Color.parseColor(red))
 //                "Good"->itemView.txtRating.setTextColor(Color.parseColor(BLUE))
             }
 
@@ -60,8 +62,8 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
                 // custom dialog
                 val dialog = Dialog(itemView.context)
                 dialog.setContentView(R.layout.mydialog)
-                // Custom Android Allert Dialog Title
-                dialog.setTitle("Ingredients informations")
+                // Custom Android Alert Dialog Title
+                dialog.setTitle("Ingredients information")
 
                 dialog.txtDialogName.text = ingredient.name
                 dialog.txtDialogRating.text = ingredient.rating
@@ -69,10 +71,10 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
                 dialog.txtDialogCategories.text = "Catagories: " + ingredient.category
 
                 when (dialog.txtDialogRating.text) {
-                    "Best" -> dialog.txtDialogRating.setTextColor(Color.parseColor(BLUE))
-                    "Good" -> dialog.txtDialogRating.setTextColor(Color.parseColor((GREEN)))
-                    "Average" -> dialog.txtDialogRating.setTextColor(Color.parseColor(YELLOW))
-                    "Poor" -> dialog.txtDialogRating.setTextColor(Color.parseColor(RED))
+                    "Best" -> dialog.txtDialogRating.setTextColor(Color.parseColor(blue))
+                    "Good" -> dialog.txtDialogRating.setTextColor(Color.parseColor((green)))
+                    "Average" -> dialog.txtDialogRating.setTextColor(Color.parseColor(yellow))
+                    "Poor" -> dialog.txtDialogRating.setTextColor(Color.parseColor(red))
 //                "Good"->itemView.txtRating.setTextColor(Color.parseColor(BLUE))
                 }
 
@@ -82,7 +84,7 @@ class IngredientAdapter(val ingredientList: List<Ingredient>) :
                 // Click cancel to dismiss android custom dialog box
                 dialogButtonTranslate.setOnClickListener {
 
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#en/${Locale.getDefault().displayLanguage}/${dialog.txtDialogInformation.text.toString()}"))
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#en/${Locale.getDefault().displayLanguage}/${dialog.txtDialogInformation.text}"))
                     startActivity(dialog.context, browserIntent, null)
 
                     dialog.dismiss()

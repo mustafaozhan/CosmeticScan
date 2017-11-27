@@ -1,5 +1,6 @@
 package mustafaozhan.github.com.cosmeticscan.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -25,12 +26,12 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
     var data: String? = null
     var counter = 0
-    private var textRecognizer: TextRecognizer ?= null
-    private var cameraSource: CameraSource?=null
+    private var textRecognizer: TextRecognizer? = null
+    private var cameraSource: CameraSource? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val fragmentView = inflater!!.inflate(R.layout.fragment_camera, container, false)
-        activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val fragmentView = inflater.inflate(R.layout.fragment_camera, container, false)
+        activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         return fragmentView
     }
@@ -39,11 +40,8 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         init()
         setRecognition()
-
-
     }
 
     private fun setRecognition() {
@@ -66,16 +64,16 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
                 }
 
+                @SuppressLint("SetTextI18n")
                 override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
 
                     val items = detections.detectedItems
                     if (items.size() != 0) {
                         txtScan.post {
                             val stringBuilder = StringBuilder()
-                            for (i in 0..items.size() - 1) {
-                                val item = items.valueAt(i)
-                                stringBuilder.append(item.value)
-                            }
+                            (0 until items.size())
+                                    .map { items.valueAt(it) }
+                                    .forEach { stringBuilder.append(it.value) }
                             // txtScan.text = stringBuilder.toString()
 
 
@@ -83,16 +81,15 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
                                 subscriber.onNext(stringBuilder.toString())
                             }).debounce(500, TimeUnit.MILLISECONDS)
                                     .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe({
-                                        text ->
+                                    .subscribe({ text ->
 
                                         doAsync {
                                             val temp = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
 
-                                            activity.runOnUiThread {
+                                            activity!!.runOnUiThread {
 
                                                 data = temp
-                                                counter = (0..temp!!.length - 1).count { temp[it] == ',' }
+                                                counter = (0 until temp!!.length).count { temp[it] == ',' }
                                                 if (counter != 0)
                                                     txtScan.text = "We found $counter ingredient(s) click for details"
                                             }
@@ -138,9 +135,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
 
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
-
         cameraSource?.start(surfaceView.holder)
-
 
     }
 

@@ -22,11 +22,8 @@ import java.util.concurrent.TimeUnit
 class ManualFragment : Fragment() {
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val fragmentView = inflater!!.inflate(R.layout.fragment_manual, container, false)
-//        bindViews(fragmentView)
-        return fragmentView
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
+            = inflater.inflate(R.layout.fragment_manual, container, false)!!
 
 //    private fun bindViews(view: View) {}
 
@@ -55,8 +52,7 @@ class ManualFragment : Fragment() {
             })
         }).debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    text ->
+                .subscribe({ text ->
 
 
                     if (text.isNotEmpty()) {
@@ -65,10 +61,7 @@ class ManualFragment : Fragment() {
 
                             val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
 
-
-
-                            activity.runOnUiThread {
-
+                            activity!!.runOnUiThread {
                                 val adapter = ingredientList?.let { IngredientAdapter(it) }
                                 recyclerViewSearch.adapter = adapter
                                 adapter?.notifyDataSetChanged()

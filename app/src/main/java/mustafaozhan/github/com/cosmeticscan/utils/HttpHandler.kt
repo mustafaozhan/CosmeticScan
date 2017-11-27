@@ -9,8 +9,8 @@ import java.net.ProtocolException
 import java.net.URL
 
 /**
- * Created by Mustafa Özhan on 6/29/17 at 9:10 AM on Linux.
- */
+* Created by Mustafa Özhan on 6/29/17 at 9:10 AM on Arch Linux.
+*/
 class HttpHandler {
 
     fun makeServiceCall(reqUrl: String): String {
