@@ -22,7 +22,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 
-class MainActivity : AppCompatActivity() {
+class OldMainActivity : AppCompatActivity() {
 
 
     companion object {

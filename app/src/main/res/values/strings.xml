@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Cosmetic Scan</string>
-    <string name="settings">Settings</string>
     <string name="camera">Camera</string>
     <string name="manual">Manual</string>
     <string name="title_activity_settings">Settings</string>
@@ -9,4 +8,9 @@
     <string name="translate">Translate</string>
     <string name="ok">OK</string>
 
+    <!--Menu-->
+    <string name="settings">Settings</string>
+    <string name="feedback">FeedBack</string>
+    <string name="support">Support</string>
+    <string name="on_github">On Github</string>
 </resources>

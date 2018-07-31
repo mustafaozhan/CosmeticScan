@@ -22,8 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name="mustafaozhan.github.com.cosmeticscan.old.ui.activities.MainActivity"
+            android:name=".main.activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mustafaozhan.github.com.cosmeticscan.old.ui.activities.OldMainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />

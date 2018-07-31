@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Cosmetic Scan</string>
-    <string name="settings">Ayarlar</string>
-    <string name="camera">Kamera</string>
-    <string name="manual">Manuel</string>
-    <string name="title_activity_settings">Ayarlar</string>
-    <string name="search">Ara</string>
-    <string name="refresh">Yenile</string>
-</resources>

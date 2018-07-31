@@ -3,9 +3,9 @@ package mustafaozhan.github.com.cosmeticscan.application
 import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.BuildConfig
 import com.crashlytics.android.core.CrashlyticsCore
 import io.fabric.sdk.android.Fabric
+import mustafaozhan.github.com.cosmeticscan.BuildConfig
 import mustafaozhan.github.com.cosmeticscan.dagger.component.ApplicationComponent
 import mustafaozhan.github.com.cosmeticscan.dagger.component.DaggerApplicationComponent
 import mustafaozhan.github.com.cosmeticscan.dagger.module.ApplicationModule

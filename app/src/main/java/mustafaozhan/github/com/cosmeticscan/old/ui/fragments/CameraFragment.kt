@@ -47,7 +47,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     private fun setRecognition() {
         mProgressBar.progress
         if (!textRecognizer!!.isOperational) {
-            Log.w("MainActivity", "Detector dependencies are not yet available")
+            Log.w("OldMainActivity", "Detector dependencies are not yet available")
         } else {
 
             cameraSource = CameraSource.Builder(activity, textRecognizer)
