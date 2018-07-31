@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.ui.activities
+package mustafaozhan.github.com.cosmeticscan.old.ui.activities
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -12,12 +12,12 @@ import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
-import mustafaozhan.github.com.cosmeticscan.common.model.database
-import mustafaozhan.github.com.cosmeticscan.ui.adapters.MyViewPagerAdapter
-import mustafaozhan.github.com.cosmeticscan.ui.fragments.CameraFragment
-import mustafaozhan.github.com.cosmeticscan.ui.fragments.ManualFragment
-import mustafaozhan.github.com.cosmeticscan.utils.HttpHandler
+import mustafaozhan.github.com.cosmeticscan.old.model.Ingredient
+import mustafaozhan.github.com.cosmeticscan.old.model.database
+import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.MyViewPagerAdapter
+import mustafaozhan.github.com.cosmeticscan.old.ui.fragments.CameraFragment
+import mustafaozhan.github.com.cosmeticscan.old.ui.fragments.ManualFragment
+import mustafaozhan.github.com.cosmeticscan.old.utils.HttpHandler
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 

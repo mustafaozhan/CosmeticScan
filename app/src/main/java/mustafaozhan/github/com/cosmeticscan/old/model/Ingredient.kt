@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.common.model
+package mustafaozhan.github.com.cosmeticscan.old.model
 
 /**
 Created by Mustafa Özhan on 7/14/17 at 2:44 PM on Linux.

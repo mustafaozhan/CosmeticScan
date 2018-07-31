@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.ui.adapters
+package mustafaozhan.github.com.cosmeticscan.old.ui.adapters
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -14,7 +14,7 @@ import android.widget.Button
 import kotlinx.android.synthetic.main.mydialog.*
 import kotlinx.android.synthetic.main.row.view.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.Ingredient
+import mustafaozhan.github.com.cosmeticscan.old.model.Ingredient
 import java.util.*
 
 

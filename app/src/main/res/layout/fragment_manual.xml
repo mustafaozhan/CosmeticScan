@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    tools:context="mustafaozhan.github.com.cosmeticscan.ui.fragments.ManualFragment">
+    tools:context="mustafaozhan.github.com.cosmeticscan.old.ui.fragments.ManualFragment">
 
 
     <RelativeLayout

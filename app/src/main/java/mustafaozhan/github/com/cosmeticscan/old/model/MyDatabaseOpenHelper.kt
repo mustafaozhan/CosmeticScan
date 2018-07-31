@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.common.model
+package mustafaozhan.github.com.cosmeticscan.old.model
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

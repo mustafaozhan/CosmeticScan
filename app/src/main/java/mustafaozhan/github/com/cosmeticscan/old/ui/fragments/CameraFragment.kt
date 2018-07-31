@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.ui.fragments
+package mustafaozhan.github.com.cosmeticscan.old.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,9 +12,9 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
-import mustafaozhan.github.com.cosmeticscan.ui.activities.IngredientsActivity
-import mustafaozhan.github.com.cosmeticscan.ui.adapters.MyViewPagerAdapter
+import mustafaozhan.github.com.cosmeticscan.old.model.MyDatabaseOpenHelper
+import mustafaozhan.github.com.cosmeticscan.old.ui.activities.IngredientsActivity
+import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.MyViewPagerAdapter
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers

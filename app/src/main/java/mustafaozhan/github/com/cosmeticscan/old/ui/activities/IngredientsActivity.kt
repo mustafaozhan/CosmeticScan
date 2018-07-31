@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.ui.activities
+package mustafaozhan.github.com.cosmeticscan.old.ui.activities
 
 import android.os.Build
 import android.os.Bundle
@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_ingredients.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.database
-import mustafaozhan.github.com.cosmeticscan.ui.adapters.IngredientAdapter
+import mustafaozhan.github.com.cosmeticscan.old.model.database
+import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.IngredientAdapter
 import org.jetbrains.anko.doAsync
 
 

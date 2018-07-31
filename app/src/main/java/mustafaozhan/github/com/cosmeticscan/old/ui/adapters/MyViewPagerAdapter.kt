@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.ui.adapters
+package mustafaozhan.github.com.cosmeticscan.old.ui.adapters
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

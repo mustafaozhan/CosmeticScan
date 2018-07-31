@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.ui.fragments
+package mustafaozhan.github.com.cosmeticscan.old.ui.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_manual.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.common.model.MyDatabaseOpenHelper
-import mustafaozhan.github.com.cosmeticscan.ui.adapters.IngredientAdapter
+import mustafaozhan.github.com.cosmeticscan.old.model.MyDatabaseOpenHelper
+import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.IngredientAdapter
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers

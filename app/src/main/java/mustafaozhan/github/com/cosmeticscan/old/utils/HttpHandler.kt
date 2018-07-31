@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.utils
+package mustafaozhan.github.com.cosmeticscan.old.utils
 
 
 import android.util.Log
