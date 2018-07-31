@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_old.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.old.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.old.model.database
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_old)
 
 
         checkPermissionsAndInit()
