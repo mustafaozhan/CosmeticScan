@@ -13,11 +13,9 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_old.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.old.model.Ingredient
-import mustafaozhan.github.com.cosmeticscan.old.model.database
 import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.MyViewPagerAdapter
 import mustafaozhan.github.com.cosmeticscan.old.ui.fragments.CameraFragmentOld
 import mustafaozhan.github.com.cosmeticscan.old.ui.fragments.ManualFragmentOld
-import mustafaozhan.github.com.cosmeticscan.old.utils.HttpHandler
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -42,14 +40,14 @@ class OldMainActivity : AppCompatActivity() {
 
         if (firsTime)
             doAsync {
-                val jsonStr = HttpHandler().makeServiceCall(URL)
-                val myGSon = Gson()
-                val response = myGSon.fromJson<List<Ingredient>>(jsonStr)
-
-                uiThread {
-                    database.insertIngredientList(response)
-                    settings.edit().putBoolean("firstTime", false).apply()
-                }
+//                val jsonStr = HttpHandler().makeServiceCall(URL)
+//                val myGSon = Gson()
+//                val response = myGSon.fromJson<List<Ingredient>>(jsonStr)
+//
+//                uiThread {
+//                    database.insertIngredientList(response)
+//                    settings.edit().putBoolean("firstTime", false).apply()
+//                }
 
             }
 

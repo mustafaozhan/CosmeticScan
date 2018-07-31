@@ -1,7 +1,9 @@
 package mustafaozhan.github.com.cosmeticscan.camera
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
+import com.livinglifetechway.quickpermissions.annotations.WithPermissions
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 
@@ -18,14 +20,15 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>() {
 
     override fun getLayoutResId(): Int = R.layout.fragment_camera
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initCamera()
     }
 
+    @WithPermissions([(Manifest.permission.CAMERA)])
+    private fun initCamera() {
 
-
+    }
 
 }

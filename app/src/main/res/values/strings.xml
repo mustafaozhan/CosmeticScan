@@ -8,6 +8,11 @@
     <string name="translate">Translate</string>
     <string name="ok">OK</string>
 
+    <!--Network-->
+    <string name="network_error_connection">Problem with the Internet connection.</string>
+    <string name="network_error_server">Server is temporarily not available.</string>
+    <string name="network_error_unexpected">An unexpected error occurred.</string>
+
     <!--Menu-->
     <string name="settings">Settings</string>
     <string name="feedback">FeedBack</string>

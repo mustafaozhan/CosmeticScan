@@ -6,6 +6,11 @@ import dagger.Module
 import dagger.Provides
 import mustafaozhan.github.com.cosmeticscan.annotation.ApplicationContext
 import mustafaozhan.github.com.cosmeticscan.application.Application
+import mustafaozhan.github.com.cosmeticscan.room.AppDatabase
+import mustafaozhan.github.com.cosmeticscan.room.AppExecutors
+import mustafaozhan.github.com.cosmeticscan.room.AppExecutors.Companion.THREAD_COUNT
+import mustafaozhan.github.com.cosmeticscan.room.DiskIOThreadExecutor
+import mustafaozhan.github.com.cosmeticscan.room.MainThreadExecutor
 import java.util.concurrent.Executors
 import javax.inject.Singleton
 
@@ -26,5 +31,23 @@ class ApplicationModule(private val application: Application) {
         return application.applicationContext
     }
 
+
+    @Provides
+    @Singleton
+    internal fun provideAppDatabase(): AppDatabase =
+            Room.databaseBuilder(application, AppDatabase::class.java, "app_db").allowMainThreadQueries().build()
+
+    @Provides
+    @Singleton
+    internal fun ingredientDao(database: AppDatabase) = database.ingredientsDao()
+
+
+    @Singleton
+    @Provides
+    fun provideAppExecutors(): AppExecutors {
+        return AppExecutors(DiskIOThreadExecutor(),
+                Executors.newFixedThreadPool(THREAD_COUNT),
+                MainThreadExecutor())
+    }
 
 }

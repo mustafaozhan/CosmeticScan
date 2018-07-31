@@ -12,7 +12,6 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.fragment_camera_old.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.old.model.MyDatabaseOpenHelper
 import mustafaozhan.github.com.cosmeticscan.old.ui.activities.IngredientsActivity
 import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.MyViewPagerAdapter
 import org.jetbrains.anko.doAsync
@@ -84,14 +83,14 @@ class CameraFragmentOld : Fragment(), MyViewPagerAdapter.OnPagePositionChangeLis
                                     .subscribe({ text ->
 
                                         doAsync {
-                                            val temp = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
+//                                            val temp = MyDatabaseOpenHelper.getInstance(context).searchInDatabase(text.toString(), txtScan.text.toString())
 
                                             activity!!.runOnUiThread {
 
-                                                data = temp
-                                                counter = (0 until temp!!.length).count { temp[it] == ',' }
-                                                if (counter != 0)
-                                                    txtScan.text = "We found $counter ingredient(s) click for details"
+//                                                data = temp
+//                                                counter = (0 until temp!!.length).count { temp[it] == ',' }
+//                                                if (counter != 0)
+//                                                    txtScan.text = "We found $counter ingredient(s) click for details"
                                             }
                                         }
 
@@ -135,7 +134,7 @@ class CameraFragmentOld : Fragment(), MyViewPagerAdapter.OnPagePositionChangeLis
 
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
 
-        cameraSource?.start(surfaceView.holder)
+//        cameraSource?.start(surfaceView.holder)
 
     }
 

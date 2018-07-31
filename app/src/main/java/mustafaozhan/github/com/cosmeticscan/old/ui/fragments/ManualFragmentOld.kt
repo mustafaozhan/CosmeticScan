@@ -11,8 +11,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_manual_old.*
 import mustafaozhan.github.com.cosmeticscan.R
-import mustafaozhan.github.com.cosmeticscan.old.model.MyDatabaseOpenHelper
-import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.IngredientAdapter
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -59,15 +57,15 @@ class ManualFragmentOld : Fragment() {
                         progressBarManual.progress
                         doAsync {
 
-                            val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
-
-                            activity!!.runOnUiThread {
-                                val adapter = ingredientList?.let { IngredientAdapter(it) }
-                                recyclerViewSearch.adapter = adapter
-                                adapter?.notifyDataSetChanged()
-                                progressBarManual.visibility = View.GONE
-
-                            }
+//                            val ingredientList = MyDatabaseOpenHelper.getInstance(context).getMatchByName(text)
+//
+//                            activity!!.runOnUiThread {
+//                                val adapter = ingredientList?.let { IngredientAdapter(it) }
+//                                recyclerViewSearch.adapter = adapter
+//                                adapter?.notifyDataSetChanged()
+//                                progressBarManual.visibility = View.GONE
+//
+//                            }
                         }
                     }
                 })
