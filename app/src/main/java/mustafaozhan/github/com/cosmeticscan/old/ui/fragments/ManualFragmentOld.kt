@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.fragment_manual.*
+import kotlinx.android.synthetic.main.fragment_manual_old.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.old.model.MyDatabaseOpenHelper
 import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.IngredientAdapter
@@ -19,11 +19,11 @@ import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 
-class ManualFragment : Fragment() {
+class ManualFragmentOld : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
-            = inflater.inflate(R.layout.fragment_manual, container, false)!!
+            = inflater.inflate(R.layout.fragment_manual_old, container, false)!!
 
 //    private fun bindViews(view: View) {}
 

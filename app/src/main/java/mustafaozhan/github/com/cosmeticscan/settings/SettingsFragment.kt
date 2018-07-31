@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.main.settings
+package mustafaozhan.github.com.cosmeticscan.settings
 
 import android.os.Bundle
 import android.view.View
@@ -21,25 +21,10 @@ class SettingsFragment : BaseMvvmFragment<SettingsFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar()
-        initViews()
-        setListeners()
-    }
-
-    private fun initViews() {
-
-
 
     }
 
 
-    private fun setListeners() {
-
-    }
-
-    private fun updateUi(update: Boolean = false, byName: Boolean = false, value: Int = 0, name: String = "") {
-
-    }
 
 
 }

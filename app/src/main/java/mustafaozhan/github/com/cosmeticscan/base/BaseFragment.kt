@@ -32,12 +32,7 @@ abstract class BaseFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    protected fun initToolbar() {
-        when (getLayoutResId()) {
-//            R.layout.fragment_main -> getBaseActivity().setSupportActionBar(fragment_main_toolbar)
-//            R.layout.fragment_settings -> getBaseActivity().setSupportActionBar(fragment_settings_toolbar)
-        }
-    }
+
 
     protected fun getBaseActivity(): BaseActivity = activity as BaseActivity
 

@@ -18,7 +18,7 @@ import mustafaozhan.github.com.cosmeticscan.base.BaseFragment
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmActivity
 import mustafaozhan.github.com.cosmeticscan.extensions.fadeIO
 import mustafaozhan.github.com.cosmeticscan.main.fragment.MainFragment
-import mustafaozhan.github.com.cosmeticscan.main.settings.SettingsFragment
+import mustafaozhan.github.com.cosmeticscan.settings.SettingsFragment
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
@@ -36,8 +36,8 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menu?.clear()
         when {
-            supportFragmentManager.findFragmentById(containerId) is MainFragment -> menuInflater.inflate(R.menu.fragment_main_menu, menu)
             supportFragmentManager.findFragmentById(containerId) is SettingsFragment -> menuInflater.inflate(R.menu.fragment_settings_menu, menu)
+            else -> menuInflater.inflate(R.menu.fragment_main_menu, menu)
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -135,7 +135,7 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
     fun snacky(text: String, hasAction: Boolean = false, actionText: String = "") {
 
         val mySnacky = Snacky.builder()
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.blue_grey_800))
+                .setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setText(text)
                 .setIcon(R.mipmap.ic_launcher)
                 .setActivity(this)

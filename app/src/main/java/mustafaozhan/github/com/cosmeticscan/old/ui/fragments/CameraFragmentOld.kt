@@ -10,7 +10,7 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
-import kotlinx.android.synthetic.main.fragment_camera.*
+import kotlinx.android.synthetic.main.fragment_camera_old.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.old.model.MyDatabaseOpenHelper
 import mustafaozhan.github.com.cosmeticscan.old.ui.activities.IngredientsActivity
@@ -21,7 +21,7 @@ import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 
-class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListener, SurfaceHolder.Callback, View.OnClickListener {
+class CameraFragmentOld : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListener, SurfaceHolder.Callback, View.OnClickListener {
 
 
     var data: String? = null
@@ -30,7 +30,7 @@ class CameraFragment : Fragment(), MyViewPagerAdapter.OnPagePositionChangeListen
     private var cameraSource: CameraSource? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val fragmentView = inflater.inflate(R.layout.fragment_camera, container, false)
+        val fragmentView = inflater.inflate(R.layout.fragment_camera_old, container, false)
         activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         return fragmentView
