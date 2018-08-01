@@ -280,4 +280,11 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+
+    <color name="red">#FF1744</color>
+    <color name="yellow">#FFEA00</color>
+    <color name="blue">#2979FF</color>
+    <color name="green">#00E676</color>
+
 </resources>

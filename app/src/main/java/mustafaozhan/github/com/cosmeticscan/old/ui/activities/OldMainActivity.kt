@@ -15,7 +15,6 @@ import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.old.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.old.ui.adapters.MyViewPagerAdapter
 import mustafaozhan.github.com.cosmeticscan.old.ui.fragments.CameraFragmentOld
-import mustafaozhan.github.com.cosmeticscan.old.ui.fragments.ManualFragmentOld
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -55,8 +54,6 @@ class OldMainActivity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = MyViewPagerAdapter(supportFragmentManager)
-        adapter.addFrag(CameraFragmentOld(), resources.getString(R.string.camera))
-        adapter.addFrag(ManualFragmentOld(), resources.getString(R.string.manual))
 
         viewPager.adapter = adapter
 

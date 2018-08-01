@@ -1,5 +1,7 @@
 package mustafaozhan.github.com.cosmeticscan.manual.adapter
 
+
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row.view.*
@@ -20,6 +22,13 @@ class IngredientAdapter : BaseRecyclerViewAdapter<Ingredient>() {
         override fun bind(item: Ingredient) {
             itemView.txtName.text = item.name
             itemView.txtRating.text = item.rating
+
+            when (itemView.txtRating.text) {
+                "Best" -> itemView.txtRating.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue))
+                "Good" -> itemView.txtRating.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
+                "Average" -> itemView.txtRating.setTextColor(ContextCompat.getColor(itemView.context, R.color.yellow))
+                "Poor" -> itemView.txtRating.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
+            }
         }
     }
 }

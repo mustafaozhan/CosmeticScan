@@ -10,8 +10,9 @@ import javax.inject.Inject
  * Created by Mustafa Ozhan on 2018-07-31.
  */
 class ManualFragmentViewModel : BaseViewModel() {
-    val ingredientLiveData: MutableLiveData<Ingredient> = MutableLiveData()
+
     var ingredients: MutableList<Ingredient> = mutableListOf()
+
     @Inject
     lateinit var ingredientDao: IngredientDao
 

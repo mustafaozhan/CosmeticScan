@@ -40,22 +40,13 @@ class IngredientAdapter(private val ingredientList: List<Ingredient>) :
 
         @SuppressLint("SetTextI18n")
         fun bindForecast(ingredient: Ingredient) {
-            val red = "#FF1744"
-            val yellow = "#FFEA00"
-            val blue = "#2979FF"
-            val green = "#00E676"
+
             itemView.txtName.text = ingredient.name
 //            itemView.txtInformation.text = ingredient.information
 //            itemView.txtCategory.text = "Category: " + ingredient.category
             itemView.txtRating.text = ingredient.rating
 
-            when (itemView.txtRating.text) {
-                "Best" -> itemView.txtRating.setTextColor(Color.parseColor(blue))
-                "Good" -> itemView.txtRating.setTextColor(Color.parseColor((green)))
-                "Average" -> itemView.txtRating.setTextColor(Color.parseColor(yellow))
-                "Poor" -> itemView.txtRating.setTextColor(Color.parseColor(red))
-//                "Good"->itemView.txtRating.setTextColor(Color.parseColor(BLUE))
-            }
+
 
             itemView.setOnClickListener {
 
@@ -70,13 +61,6 @@ class IngredientAdapter(private val ingredientList: List<Ingredient>) :
                 dialog.txtDialogInformation.text = ingredient.information
                 dialog.txtDialogCategories.text = "Catagories: " + ingredient.category
 
-                when (dialog.txtDialogRating.text) {
-                    "Best" -> dialog.txtDialogRating.setTextColor(Color.parseColor(blue))
-                    "Good" -> dialog.txtDialogRating.setTextColor(Color.parseColor((green)))
-                    "Average" -> dialog.txtDialogRating.setTextColor(Color.parseColor(yellow))
-                    "Poor" -> dialog.txtDialogRating.setTextColor(Color.parseColor(red))
-//                "Good"->itemView.txtRating.setTextColor(Color.parseColor(BLUE))
-                }
 
 
                 val dialogButtonTranslate = dialog.findViewById<View>(R.id.btnDialogTranslate) as Button
