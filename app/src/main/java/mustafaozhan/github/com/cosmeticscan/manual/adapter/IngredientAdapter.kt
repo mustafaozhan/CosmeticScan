@@ -4,7 +4,7 @@ package mustafaozhan.github.com.cosmeticscan.manual.adapter
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.row.view.*
+import kotlinx.android.synthetic.main.item_ingredient.view.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.model.Ingredient
 import mustafaozhan.github.com.mycurrencies.base.adapter.BaseRecyclerViewAdapter
@@ -16,7 +16,7 @@ import mustafaozhan.github.com.mycurrencies.base.adapter.BaseViewHolder
 class IngredientAdapter : BaseRecyclerViewAdapter<Ingredient>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Ingredient> =
-            RatesViewHolder(getViewHolderView(parent, R.layout.row))
+            RatesViewHolder(getViewHolderView(parent, R.layout.item_ingredient))
 
     class RatesViewHolder(itemView: View) : BaseViewHolder<Ingredient>(itemView) {
         override fun bind(item: Ingredient) {

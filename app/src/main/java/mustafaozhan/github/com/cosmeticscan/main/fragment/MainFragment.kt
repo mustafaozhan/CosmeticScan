@@ -1,12 +1,18 @@
 package mustafaozhan.github.com.cosmeticscan.main.fragment
 
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 import mustafaozhan.github.com.cosmeticscan.camera.CameraFragment
+import mustafaozhan.github.com.cosmeticscan.extensions.fadeIO
 import mustafaozhan.github.com.cosmeticscan.manual.ManualFragment
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -30,10 +36,11 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
         setListeners()
 
         doAsync {
-        initData()
-        uiThread {
-            mLoadingView.smoothToHide()
-        }}
+            initData()
+            uiThread {
+                mLoadingView.smoothToHide()
+            }
+        }
     }
 
     private fun initData() {
@@ -58,4 +65,57 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
         super.onResume()
     }
 
+    private fun showGithub() {
+        webView.apply {
+            var newUserAgent: String? = settings.userAgentString
+            try {
+                val ua = settings.userAgentString
+                val androidOSString = settings.userAgentString.substring(ua.indexOf("("), ua.indexOf(")") + 1)
+                newUserAgent = settings.userAgentString.replace(androidOSString, "(X11; Linux x86_64)")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            settings.apply {
+                loadWithOverviewMode = true
+                javaScriptEnabled = true
+                useWideViewPort = true
+                setSupportZoom(true)
+                builtInZoomControls = true
+                displayZoomControls = false
+                userAgentString = newUserAgent
+            }
+            loadUrl("https://github.com/mustafaozhan/CosmeticScan")
+            fadeIO(true)
+            bringToFront()
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun showRateDialog() {
+        val builder = AlertDialog.Builder(context, R.style.AlertDialogCustom)
+                .setTitle("Support us !")
+                .setMessage("Please, rate and commend to the app at Google Play Store")
+                .setPositiveButton("RATE") { _, _ ->
+                    var link = "market://details?id="
+                    try {
+                        context?.packageManager?.getPackageInfo(context?.packageName + ":Cosmetic Scan", 0)
+                    } catch (e: PackageManager.NameNotFoundException) {
+                        link = "https://play.google.com/store/apps/details?id="
+                    }
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link + context?.packageName)))
+                }
+                .setNegativeButton("CANCEL", null)
+        builder.show()
+    }
+
+    private fun sendFeedBack() {
+        Intent(Intent.ACTION_SEND).apply {
+            type = "text/email"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("mr.mustafa.ozhan@gmail.com"))
+            putExtra(Intent.EXTRA_SUBJECT, "Feedback for My Currencies")
+            putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "")
+            startActivity(Intent.createChooser(this, "Send Feedback:"))
+        }
+    }
 }
