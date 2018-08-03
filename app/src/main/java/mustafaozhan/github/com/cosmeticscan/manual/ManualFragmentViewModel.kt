@@ -1,6 +1,5 @@
 package mustafaozhan.github.com.cosmeticscan.manual
 
-import android.arch.lifecycle.MutableLiveData
 import mustafaozhan.github.com.cosmeticscan.base.BaseViewModel
 import mustafaozhan.github.com.cosmeticscan.base.model.Ingredient
 import mustafaozhan.github.com.cosmeticscan.room.dao.IngredientDao

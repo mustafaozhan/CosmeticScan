@@ -14,7 +14,6 @@ import com.livinglifetechway.quickpermissions.annotations.WithPermissions
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
-import mustafaozhan.github.com.cosmeticscan.old.ui.activities.IngredientsActivity
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -50,7 +49,7 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
     private var cameraSource: CameraSource? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val fragmentView = inflater.inflate(R.layout.fragment_camera_old, container, false)
+        val fragmentView = inflater.inflate(R.layout.fragment_camera, container, false)
         activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         doAsync {
@@ -107,17 +106,17 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe { text ->
 
-                                        doAsync {
-                                            val temp = viewModel.ingredients.filter { it.name }(text.toString(), txtScan.text.toString())
-
-                                            activity!!.runOnUiThread {
-
-                                                data = temp
-                                                counter = (0 until temp!!.length).count { temp[it] == ',' }
-                                                if (counter != 0)
-                                                    txtScan.text = "We found $counter ingredient(s) click for details"
-                                            }
-                                        }
+//                                        doAsync {
+//                                            val temp = viewModel.ingredients.filter { it.name }(text.toString(), txtScan.text.toString())
+//
+//                                            activity!!.runOnUiThread {
+//
+//                                                data = temp
+//                                                counter = (0 until temp!!.length).count { temp[it] == ',' }
+//                                                if (counter != 0)
+//                                                    txtScan.text = "We found $counter ingredient(s) click for details"
+//                                            }
+//                                        }
 
 
                                     }
@@ -142,9 +141,9 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
 
             txtScan -> {
                 if (txtScan.text.toString().length > 1) {
-                    val intent = Intent(context, IngredientsActivity::class.java)
-                    intent.putExtra("data", data)
-                    startActivity(intent)
+//                    val intent = Intent(context, IngredientsActivity::class.java)
+//                    intent.putExtra("data", data)
+//                    startActivity(intent)
                 }
             }
             btnRefresh -> {

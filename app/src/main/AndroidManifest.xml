@@ -26,20 +26,10 @@
         <activity
             android:name=".main.activity.MainActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="mustafaozhan.github.com.cosmeticscan.old.ui.activities.OldMainActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Design.NoActionBar" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fbacbda6e429dfadcba3d54f47c1588d524b5b24" />
-        <activity
-            android:name="mustafaozhan.github.com.cosmeticscan.old.ui.activities.IngredientsActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 
 </manifest>

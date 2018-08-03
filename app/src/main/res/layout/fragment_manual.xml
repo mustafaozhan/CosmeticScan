@@ -1,19 +1,32 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/eTxtSearch"
+    <LinearLayout
+        android:id="@+id/layoutSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="@string/search"
+        android:background="@color/blue_grey_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/eTxtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:hint="@string/search"
+            android:shadowColor="@color/blue_grey_100"
+            android:textColor="@color/blue_grey_100"
+            android:textColorHighlight="@color/blue_grey_100"
+            android:textColorHint="@color/blue_grey_100"
+            android:textColorLink="@color/blue_grey_100" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ingredientRecyclerView"
@@ -23,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTxtSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutSearch" />
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/mLoadingView"
