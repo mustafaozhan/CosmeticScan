@@ -16,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected abstract fun getLayoutResId(): Int
 
     @IdRes
-    open var containerId: Int = R.id.content
+    open var containerId: Int = R.id.viewpager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +29,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     open fun getDefaultFragment(): BaseFragment? = null
 
-    protected fun setHomeAsUpEnabled(enabled: Boolean) {
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(enabled)
-        }
-    }
+//    protected fun setHomeAsUpEnabled(enabled: Boolean) {
+//        if (supportActionBar != null) {
+//            supportActionBar!!.setDisplayHomeAsUpEnabled(enabled)
+//        }
+//    }
 
     protected fun addFragment(containerViewId: Int, fragment: BaseFragment) {
         val ft = supportFragmentManager.beginTransaction()

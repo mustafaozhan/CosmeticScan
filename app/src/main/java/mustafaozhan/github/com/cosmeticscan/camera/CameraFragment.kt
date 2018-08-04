@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
  */
-class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHolder.Callback, View.OnClickListener {
+class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, View.OnClickListener {
 
     companion object {
         fun newInstance(): CameraFragment = CameraFragment()
@@ -32,16 +32,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
 
     override fun getLayoutResId(): Int = R.layout.fragment_camera
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initCamera()
-    }
-
-    @WithPermissions([(Manifest.permission.CAMERA)])
-    private fun initCamera() {
-
-    }
 
     var data: String? = null
     var counter = 0
@@ -63,12 +53,13 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        init()
-        setRecognition()
+//        init()
+//        setRecognition()
     }
 
+    @WithPermissions([(Manifest.permission.CAMERA)])
     private fun setRecognition() {
-        mProgressBar.progress
+
         if (!textRecognizer!!.isOperational) {
             Log.w("OldMainActivity", "Detector dependencies are not yet available")
         } else {
@@ -106,7 +97,7 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe { text ->
 
-//                                        doAsync {
+                                        //                                        doAsync {
 //                                            val temp = viewModel.ingredients.filter { it.name }(text.toString(), txtScan.text.toString())
 //
 //                                            activity!!.runOnUiThread {
@@ -169,7 +160,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(),  SurfaceHold
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
         cameraSource?.stop()
     }
-
 
 
     override fun onResume() {

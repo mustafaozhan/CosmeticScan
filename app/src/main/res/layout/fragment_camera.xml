@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        tools:context="mustafaozhan.github.com.cosmeticscan.old.ui.fragments.CameraFragmentOld">
+        tools:context="mustafaozhan.github.com.cosmeticscan.camera.CameraFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,12 +23,11 @@
 
                 <SurfaceView
                     android:id="@+id/surfaceView"
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
                 <com.wang.avi.AVLoadingIndicatorView
-                    android:id="@+id/mProgressBar"
+                    android:id="@+id/mLoadingView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"

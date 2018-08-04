@@ -1,17 +1,21 @@
 package mustafaozhan.github.com.cosmeticscan.main.activity
 
 import android.graphics.Typeface
+import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
-import android.view.Menu
+import android.support.v4.view.ViewPager
 import android.view.View
 import de.mateware.snacky.Snacky
 import kotlinx.android.synthetic.main.activity_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseFragment
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmActivity
+import mustafaozhan.github.com.cosmeticscan.camera.CameraFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.fadeIO
+import mustafaozhan.github.com.cosmeticscan.main.adapter.MainActivityViewPagerAdapter
 import mustafaozhan.github.com.cosmeticscan.main.fragment.MainFragment
+import mustafaozhan.github.com.cosmeticscan.manual.ManualFragment
 import mustafaozhan.github.com.cosmeticscan.settings.SettingsFragment
 
 /**
@@ -27,16 +31,30 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
 
     override fun getLayoutResId(): Int = R.layout.activity_main
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        setupViewPager(viewpager)
+    }
+
+    private fun setupViewPager(viewPager: ViewPager) {
+        val adapter = MainActivityViewPagerAdapter(supportFragmentManager)
+        adapter.addFrag(CameraFragment())
+        adapter.addFrag(MainFragment())
+        adapter.addFrag(ManualFragment())
+
+
+        viewPager.adapter = adapter
+    }
 
     override fun onBackPressed() {
         when {
-            webView.visibility == View.VISIBLE -> {
-                webView.apply {
-                    fadeIO(false)
-                    visibility = View.GONE
-                }
-            }
+//            webView.visibility == View.VISIBLE -> {
+//                webView.apply {
+//                    fadeIO(false)
+//                    visibility = View.GONE
+//                }
+//            }
             else -> {
                 if (doubleBackToExitPressedOnce) {
                     super.onBackPressed()

@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
@@ -118,4 +117,6 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
             startActivity(Intent.createChooser(this, "Send Feedback:"))
         }
     }
+
+
 }

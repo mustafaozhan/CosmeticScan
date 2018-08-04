@@ -27,13 +27,6 @@ abstract class BaseFragment : Fragment() {
         return inflater.inflate(getLayoutResId(), container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-
-
     protected fun getBaseActivity(): BaseActivity = activity as BaseActivity
 
 
