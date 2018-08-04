@@ -15,10 +15,6 @@ import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.reObserve
-import org.jetbrains.anko.doAsync
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import java.util.concurrent.TimeUnit
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
@@ -43,16 +39,8 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
         init()
         setListeners()
-        initData()
     }
 
-    private fun initData() {
-        viewModel.foundedIngredientsLiveData.reObserve(this, Observer {
-            it?.let {
-                txtScan.text=it
-            }
-        })
-    }
 
     private fun setListeners() {
         txtScan.setOnClickListener {
@@ -62,9 +50,7 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 //                startActivity(intent)
 //            }
         }
-        btnRefresh.setOnClickListener {
-            txtScan.text = ""
-        }
+        btnRefresh.setOnClickListener { refresh() }
     }
 
 
@@ -81,15 +67,25 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     }
 
     override fun release() {}
+    @SuppressLint("SetTextI18n")
     override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
         val items = detections.detectedItems
         if (items.size() != 0) {
-            val foundedText = (0 until items.size())
-                    .map { items.valueAt(it) }
-                    .forEach { StringBuilder().append(it.value) }.toString()
-            viewModel.searchForIngredients(foundedText)
+
+            val stringBuilder = StringBuilder()
+            for (i in 0 until items.size()) {
+                val item = items.valueAt(i)
+                stringBuilder.append(item.value)
+            }
+            viewModel.searchForIngredients(stringBuilder.toString())
+            txtScan.text = "We found ${viewModel.foundedList.size + 1} ingredient(s) click for details"
 
         }
+    }
+
+    fun refresh() {
+        txtScan.text = ""
+        viewModel.refresh()
     }
 
 
@@ -114,12 +110,13 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
     override fun onResume() {
         super.onResume()
-        txtScan.text = ""
+        refresh()
     }
 
     override fun onPause() {
         super.onPause()
         cameraSource?.stop()
+        refresh()
     }
 
 }
