@@ -12,7 +12,7 @@ import java.io.Serializable
 @Entity(tableName = "ingredient")
 data class Ingredient(
         @PrimaryKey @ColumnInfo(name = "id") val id: Int,
-        @ColumnInfo(name = "name") val name: String,
+        @ColumnInfo(name = "name") var name: String,
         @ColumnInfo(name = "information") val information: String,
         @ColumnInfo(name = "category") val category: String,
         @ColumnInfo(name = "rating") val rating: String) :Serializable

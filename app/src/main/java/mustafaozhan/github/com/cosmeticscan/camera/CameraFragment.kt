@@ -3,8 +3,8 @@ package mustafaozhan.github.com.cosmeticscan.camera
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.SurfaceHolder
+import android.view.View
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
  */
-class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, View.OnClickListener {
+class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback {
 
     companion object {
         fun newInstance(): CameraFragment = CameraFragment()
@@ -31,125 +31,99 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
     override fun getLayoutResId(): Int = R.layout.fragment_camera
 
-
-    var data: String? = null
-    var counter = 0
     private var textRecognizer: TextRecognizer? = null
     private var cameraSource: CameraSource? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val fragmentView = inflater.inflate(R.layout.fragment_camera, container, false)
-        activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         doAsync {
             viewModel.getIngredients()
         }
+        init()
+        setRecognition()
+        setListeners()
 
-        return fragmentView
     }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-//        init()
-//        setRecognition()
-    }
-
-    @WithPermissions([(Manifest.permission.CAMERA)])
-    private fun setRecognition() {
-
-        if (!textRecognizer!!.isOperational) {
-            Log.w("OldMainActivity", "Detector dependencies are not yet available")
-        } else {
-
-            cameraSource = CameraSource.Builder(activity, textRecognizer)
-                    .setFacing(CameraSource.CAMERA_FACING_BACK)
-                    //  .setRequestedPreviewSize(1280, 1324)
-                    .setRequestedFps(2.0f)
-                    .setAutoFocusEnabled(true)
-                    .build()
-
-
-
-            textRecognizer!!.setProcessor(object : Detector.Processor<TextBlock> {
-                override fun release() {
-
-                }
-
-                @SuppressLint("SetTextI18n")
-                override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
-
-                    val items = detections.detectedItems
-                    if (items.size() != 0) {
-                        txtScan.post {
-                            val stringBuilder = StringBuilder()
-                            (0 until items.size())
-                                    .map { items.valueAt(it) }
-                                    .forEach { stringBuilder.append(it.value) }
-                            // txtScan.text = stringBuilder.toString()
-
-
-                            Observable.create(Observable.OnSubscribe<String> { subscriber ->
-                                subscriber.onNext(stringBuilder.toString())
-                            }).debounce(500, TimeUnit.MILLISECONDS)
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe { text ->
-
-                                        //                                        doAsync {
-//                                            val temp = viewModel.ingredients.filter { it.name }(text.toString(), txtScan.text.toString())
-//
-//                                            activity!!.runOnUiThread {
-//
-//                                                data = temp
-//                                                counter = (0 until temp!!.length).count { temp[it] == ',' }
-//                                                if (counter != 0)
-//                                                    txtScan.text = "We found $counter ingredient(s) click for details"
-//                                            }
-//                                        }
-
-
-                                    }
-
-
-                        }
-                    }
-                }
-            })
+    private fun setListeners() {
+        txtScan.setOnClickListener {
+            //            if (txtScan.text.toString().length > 1) {
+//                val intent = Intent(context, IngredientsActivity::class.java)
+//                intent.putExtra("data", data)
+//                startActivity(intent)
+//            }
+        }
+        btnRefresh.setOnClickListener {
+            txtScan.text = ""
         }
     }
 
+
     private fun init() {
-        btnRefresh.setOnClickListener(this)
         surfaceView.holder.addCallback(this)
-        txtScan.setOnClickListener(this)
         textRecognizer = TextRecognizer.Builder(activity).build()
     }
 
-    override fun onClick(view: View?) {
-        when (view) {
+    private fun setRecognition() {
 
-            txtScan -> {
-                if (txtScan.text.toString().length > 1) {
-//                    val intent = Intent(context, IngredientsActivity::class.java)
-//                    intent.putExtra("data", data)
-//                    startActivity(intent)
+
+        cameraSource = CameraSource.Builder(activity, textRecognizer)
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
+                .setRequestedFps(2.0f)
+                .setAutoFocusEnabled(true)
+                .build()
+
+
+
+        textRecognizer!!.setProcessor(object : Detector.Processor<TextBlock> {
+            override fun release() {
+
+            }
+
+            @SuppressLint("SetTextI18n")
+            override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
+
+                val items = detections.detectedItems
+                if (items.size() != 0) {
+                    txtScan.post {
+                        val stringBuilder = StringBuilder()
+                        (0 until items.size())
+                                .map { items.valueAt(it) }
+                                .forEach { stringBuilder.append(it.value) }
+                        // txtScan.text = stringBuilder.toString()
+
+
+                        Observable.unsafeCreate(Observable.OnSubscribe<String> { subscriber ->
+                            subscriber.onNext(stringBuilder.toString())
+                        }).debounce(500, TimeUnit.MILLISECONDS)
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe { text ->
+                                    doAsync {
+                                        viewModel.search(text)
+
+                                        if (viewModel.counter != 0)
+                                            txtScan.text = "We found ${viewModel.counter} ingredient(s) click for details"
+                                    }
+                                }
+                    }
                 }
             }
-            btnRefresh -> {
-                txtScan.text = ""
-                data = null
-                counter = 0
-            }
-        }
-
+        })
 
     }
 
+    @SuppressLint("MissingPermission")
+    @WithPermissions([(Manifest.permission.CAMERA)])
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
+        try {
 
-//        cameraSource?.start(surfaceView.holder)
 
+            cameraSource?.start(surfaceView.holder)
+        } catch (e: Exception) {
+
+        }
     }
 
     override fun surfaceChanged(surfaceHolder: SurfaceHolder, i: Int, i1: Int, i2: Int) {
@@ -164,8 +138,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     override fun onResume() {
         super.onResume()
         txtScan.text = ""
-        data = null
-        counter = 0
 
     }
 
