@@ -20,11 +20,11 @@
 
             android:gravity="center"
             android:hint="@string/search"
-            android:shadowColor="@color/blue_grey_100"
-            android:textColor="@color/blue_grey_100"
-            android:textColorHighlight="@color/blue_grey_100"
-            android:textColorHint="@color/blue_grey_100"
-            android:textColorLink="@color/blue_grey_100" />
+            android:shadowColor="@color/textWhite"
+            android:textColor="@color/textWhite"
+            android:textColorHighlight="@color/textWhite"
+            android:textColorHint="@color/textWhite"
+            android:textColorLink="@color/textWhite" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -47,7 +47,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:indicatorColor="@color/blue_grey_200"
+        app:indicatorColor="@color/textWhite"
         app:indicatorName="BallClipRotateMultipleIndicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,7 @@ package mustafaozhan.github.com.cosmeticscan.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.SurfaceHolder
 import android.view.View
@@ -13,6 +14,7 @@ import com.livinglifetechway.quickpermissions.annotations.WithPermissions
 import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
+import mustafaozhan.github.com.cosmeticscan.extensions.reObserve
 import org.jetbrains.anko.doAsync
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -39,12 +41,17 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        doAsync {
-            viewModel.getIngredients()
-        }
         init()
         setListeners()
+        initData()
+    }
 
+    private fun initData() {
+        viewModel.foundedIngredientsLiveData.reObserve(this, Observer {
+            it?.let {
+                txtScan.text=it
+            }
+        })
     }
 
     private fun setListeners() {
@@ -77,39 +84,22 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
         val items = detections.detectedItems
         if (items.size() != 0) {
-            txtScan.post {
-                val stringBuilder = StringBuilder()
-                (0 until items.size())
-                        .map { items.valueAt(it) }
-                        .forEach { stringBuilder.append(it.value) }
-                txtScan.text = stringBuilder.toString()
+            val foundedText = (0 until items.size())
+                    .map { items.valueAt(it) }
+                    .forEach { StringBuilder().append(it.value) }.toString()
+            viewModel.searchForIngredients(foundedText)
 
-
-                Observable.unsafeCreate(Observable.OnSubscribe<String> { subscriber ->
-                    subscriber.onNext(stringBuilder.toString())
-                }).debounce(500, TimeUnit.MILLISECONDS)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { text ->
-                            doAsync {
-                                viewModel.search(text)
-
-                                if (viewModel.counter != 0)
-                                    txtScan.text = "We found ${viewModel.counter} ingredient(s) click for details"
-                            }
-                        }
-            }
         }
     }
+
 
     @SuppressLint("MissingPermission")
     @WithPermissions([(Manifest.permission.CAMERA)])
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
         try {
-
-
             cameraSource?.start(surfaceView.holder)
         } catch (e: Exception) {
-
+            e.printStackTrace()
         }
     }
 
@@ -125,7 +115,11 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     override fun onResume() {
         super.onResume()
         txtScan.text = ""
+    }
 
+    override fun onPause() {
+        super.onPause()
+        cameraSource?.stop()
     }
 
 }

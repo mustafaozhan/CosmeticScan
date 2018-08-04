@@ -10,17 +10,11 @@ import javax.inject.Inject
  */
 class ManualFragmentViewModel : BaseViewModel() {
 
-    var ingredients: MutableList<Ingredient> = mutableListOf()
-
     @Inject
-    lateinit var ingredientDao: IngredientDao
+    lateinit var ingredients: MutableList<Ingredient>
 
     override fun inject() {
         viewModelComponent.inject(this)
-    }
-
-    fun getIngredients() {
-        ingredients = ingredientDao.getAllIngredients()
     }
 
 

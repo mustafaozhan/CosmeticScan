@@ -32,7 +32,7 @@
                     android:layout_height="300dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    app:indicatorColor="@color/blue_grey_200"
+                    app:indicatorColor="@color/textWhite"
                     app:indicatorName="BallClipRotateMultipleIndicator" />
 
 
@@ -42,10 +42,10 @@
                 android:id="@+id/rLayoutScan"
                 android:layout_width="match_parent"
                 android:layout_height="45sp"
-
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:background="@color/colorPrimary">
 
                 <TextView
                     android:id="@+id/txtScan"
@@ -54,7 +54,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-
                     android:layout_toLeftOf="@+id/btnRefresh"
                     android:layout_toStartOf="@+id/btnRefresh"
                     android:gravity="center"
@@ -69,7 +68,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/refresh" />
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/refresh"
+                    android:textColor="@color/textWhite" />
             </RelativeLayout>
         </RelativeLayout>
     </FrameLayout>

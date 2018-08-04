@@ -42,6 +42,11 @@ class ApplicationModule(private val application: Application) {
     internal fun ingredientDao(database: AppDatabase) = database.ingredientsDao()
 
 
+    @Provides
+    @Singleton
+    internal fun ingredients(database: AppDatabase) = database.ingredientsDao().getAllIngredients()
+
+
     @Singleton
     @Provides
     fun provideAppExecutors(): AppExecutors {

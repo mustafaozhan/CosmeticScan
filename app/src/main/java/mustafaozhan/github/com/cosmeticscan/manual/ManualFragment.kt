@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.fragment_manual.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 import mustafaozhan.github.com.cosmeticscan.manual.adapter.IngredientAdapter
-import org.jetbrains.anko.doAsync
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
@@ -28,9 +27,7 @@ class ManualFragment : BaseMvvmFragment<ManualFragmentViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        doAsync {
-            viewModel.getIngredients()
-        }
+
         initViews()
         initData()
     }

@@ -11,27 +11,24 @@ import javax.inject.Inject
  */
 class CameraFragmentViewModel : BaseViewModel() {
 
-    var ingredients: MutableList<Ingredient> = mutableListOf()
-    var foundedLiveData: MutableLiveData<String> = MutableLiveData()
-    var counter = 0
+
     override fun inject() {
         viewModelComponent.inject(this)
     }
 
     @Inject
-    lateinit var ingredientDao: IngredientDao
+    lateinit var ingredients: MutableList<Ingredient>
+
+    var foundedIngredientsLiveData: MutableLiveData<String> = MutableLiveData()
 
 
-    fun getIngredients() {
-        ingredients = ingredientDao.getAllIngredients()
-    }
+    fun searchForIngredients(foundedText: String) {
 
-    fun search(text: String?) {
         ingredients.forEach {
-            if (it.name == text.toString()) {
-                counter++
-            }
+            if (foundedText.contains(it.name))
+                foundedIngredientsLiveData.postValue(it.name)
         }
+
     }
 
 }

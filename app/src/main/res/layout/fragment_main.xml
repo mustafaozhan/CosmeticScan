@@ -81,7 +81,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:indicatorColor="@color/blue_grey_200"
+        app:indicatorColor="@color/textWhite"
         app:indicatorName="BallClipRotateMultipleIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

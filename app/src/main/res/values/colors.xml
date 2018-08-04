@@ -3,6 +3,7 @@
     <color name="colorPrimary">@color/blue_grey_600</color>
     <color name="colorPrimaryDark">@color/blue_grey_800</color>
     <color name="colorAccent">@color/cyan_700</color>
+    <color name="textWhite">@color/blue_grey_200</color>
     <color name="Transparent">#00000000</color>
 
     <color name="red_50">#FFEBEE</color>
