@@ -33,18 +33,20 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setupViewPager(viewpager)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = MainActivityViewPagerAdapter(supportFragmentManager)
-        adapter.addFrag(CameraFragment())
-        adapter.addFrag(MainFragment())
-        adapter.addFrag(ManualFragment())
-
-
-        viewPager.adapter = adapter
+        val mAdapter = MainActivityViewPagerAdapter(supportFragmentManager)
+        mAdapter.apply {
+            addFrag(CameraFragment())
+            addFrag(MainFragment())
+            addFrag(ManualFragment())
+        }
+        viewPager.apply {
+            adapter=mAdapter
+            currentItem = 1
+        }
     }
 
     override fun onBackPressed() {

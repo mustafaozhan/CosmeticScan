@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter
  */
 class MainActivityViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
     private val mFragmentList = ArrayList<Fragment>()
-    private val mFragmentTitleList = ArrayList<String>()
     override fun getItem(position: Int): Fragment {
         return mFragmentList[position]
     }
@@ -22,7 +21,4 @@ class MainActivityViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdap
         mFragmentList.add(fragment)
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return mFragmentTitleList[position]
-    }
 }

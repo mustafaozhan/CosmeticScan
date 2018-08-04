@@ -3,9 +3,9 @@ package mustafaozhan.github.com.cosmeticscan.base
 import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import mustafaozhan.github.com.cosmeticscan.R
-import android.support.v4.app.FragmentManager
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
@@ -29,11 +29,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     open fun getDefaultFragment(): BaseFragment? = null
 
-//    protected fun setHomeAsUpEnabled(enabled: Boolean) {
-//        if (supportActionBar != null) {
-//            supportActionBar!!.setDisplayHomeAsUpEnabled(enabled)
-//        }
-//    }
 
     protected fun addFragment(containerViewId: Int, fragment: BaseFragment) {
         val ft = supportFragmentManager.beginTransaction()

@@ -7,12 +7,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
-import mustafaozhan.github.com.cosmeticscan.camera.CameraFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.fadeIO
-import mustafaozhan.github.com.cosmeticscan.manual.ManualFragment
+import mustafaozhan.github.com.cosmeticscan.main.activity.MainActivity
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -32,6 +32,7 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setListeners()
 
         doAsync {
@@ -50,8 +51,8 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
 
     private fun setListeners() {
-        cardViewCamera.setOnClickListener { getBaseActivity().replaceFragment(CameraFragment.newInstance(), true) }
-        cardViewManual.setOnClickListener { getBaseActivity().replaceFragment(ManualFragment.newInstance(), true) }
+        cardViewCamera.setOnClickListener { (activity as MainActivity).viewpager.currentItem = 0 }
+        cardViewManual.setOnClickListener { (activity as MainActivity).viewpager.currentItem = 2 }
     }
 
     override fun onPause() {

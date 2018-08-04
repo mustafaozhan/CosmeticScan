@@ -2,7 +2,6 @@ package mustafaozhan.github.com.cosmeticscan.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
