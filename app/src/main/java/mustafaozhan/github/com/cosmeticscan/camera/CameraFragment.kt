@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.reObserve
+import mustafaozhan.github.com.cosmeticscan.ingredients.IngredientsFragment
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
@@ -44,11 +45,9 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
     private fun setListeners() {
         txtScan.setOnClickListener {
-            //            if (txtScan.text.toString().length > 1) {
-//                val intent = Intent(context, IngredientsActivity::class.java)
-//                intent.putExtra("data", data)
-//                startActivity(intent)
-//            }
+            if (txtScan.text.toString().length > 1) {
+                getBaseActivity().replaceFragment(IngredientsFragment.newInstance(viewModel.foundedList), true)
+            }
         }
         btnRefresh.setOnClickListener { refresh() }
     }

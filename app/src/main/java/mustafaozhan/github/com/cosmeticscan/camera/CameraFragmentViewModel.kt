@@ -17,7 +17,7 @@ class CameraFragmentViewModel : BaseViewModel() {
     @Inject
     lateinit var ingredients: MutableList<Ingredient>
 
-    var foundedList: MutableList<String> = mutableListOf()
+    var foundedList: ArrayList<String> = ArrayList<String>()
 
 
     fun searchForIngredients(foundedText: String) {

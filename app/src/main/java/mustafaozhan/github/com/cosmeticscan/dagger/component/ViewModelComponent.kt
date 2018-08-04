@@ -4,6 +4,7 @@ import dagger.Subcomponent
 import mustafaozhan.github.com.cosmeticscan.annotation.PerViewModel
 import mustafaozhan.github.com.cosmeticscan.camera.CameraFragmentViewModel
 import mustafaozhan.github.com.cosmeticscan.dagger.module.ViewModelModule
+import mustafaozhan.github.com.cosmeticscan.ingredients.IngredientsFragmentViewModel
 import mustafaozhan.github.com.cosmeticscan.main.activity.MainActivityViewModel
 import mustafaozhan.github.com.cosmeticscan.main.fragment.MainFragmentViewModel
 import mustafaozhan.github.com.cosmeticscan.settings.SettingsFragmentViewModel
@@ -20,5 +21,6 @@ interface ViewModelComponent {
     fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
     fun inject(cameraFragmentViewModel: CameraFragmentViewModel)
     fun inject(manualFragmentViewModel: ManualFragmentViewModel)
+    fun inject(ingredientsFragmentViewModel: IngredientsFragmentViewModel)
 
 }
