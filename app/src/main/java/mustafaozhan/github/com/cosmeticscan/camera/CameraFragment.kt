@@ -21,7 +21,8 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
  */
-class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback {
+class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, Detector.Processor<TextBlock> {
+
 
     companion object {
         fun newInstance(): CameraFragment = CameraFragment()
@@ -42,7 +43,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
             viewModel.getIngredients()
         }
         init()
-        setRecognition()
         setListeners()
 
     }
@@ -64,54 +64,41 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     private fun init() {
         surfaceView.holder.addCallback(this)
         textRecognizer = TextRecognizer.Builder(activity).build()
-    }
-
-    private fun setRecognition() {
-
-
         cameraSource = CameraSource.Builder(activity, textRecognizer)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(2.0f)
                 .setAutoFocusEnabled(true)
                 .build()
 
+        textRecognizer!!.setProcessor(this)
+    }
+
+    override fun release() {}
+    override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
+        val items = detections.detectedItems
+        if (items.size() != 0) {
+            txtScan.post {
+                val stringBuilder = StringBuilder()
+                (0 until items.size())
+                        .map { items.valueAt(it) }
+                        .forEach { stringBuilder.append(it.value) }
+                txtScan.text = stringBuilder.toString()
 
 
-        textRecognizer!!.setProcessor(object : Detector.Processor<TextBlock> {
-            override fun release() {
+                Observable.unsafeCreate(Observable.OnSubscribe<String> { subscriber ->
+                    subscriber.onNext(stringBuilder.toString())
+                }).debounce(500, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { text ->
+                            doAsync {
+                                viewModel.search(text)
 
+                                if (viewModel.counter != 0)
+                                    txtScan.text = "We found ${viewModel.counter} ingredient(s) click for details"
+                            }
+                        }
             }
-
-            @SuppressLint("SetTextI18n")
-            override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
-
-                val items = detections.detectedItems
-                if (items.size() != 0) {
-                    txtScan.post {
-                        val stringBuilder = StringBuilder()
-                        (0 until items.size())
-                                .map { items.valueAt(it) }
-                                .forEach { stringBuilder.append(it.value) }
-                        // txtScan.text = stringBuilder.toString()
-
-
-                        Observable.unsafeCreate(Observable.OnSubscribe<String> { subscriber ->
-                            subscriber.onNext(stringBuilder.toString())
-                        }).debounce(500, TimeUnit.MILLISECONDS)
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe { text ->
-                                    doAsync {
-                                        viewModel.search(text)
-
-                                        if (viewModel.counter != 0)
-                                            txtScan.text = "We found ${viewModel.counter} ingredient(s) click for details"
-                                    }
-                                }
-                    }
-                }
-            }
-        })
-
+        }
     }
 
     @SuppressLint("MissingPermission")
