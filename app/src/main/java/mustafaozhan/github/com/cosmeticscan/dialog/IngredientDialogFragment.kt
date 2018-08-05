@@ -1,5 +1,7 @@
 package mustafaozhan.github.com.cosmeticscan.dialog
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
@@ -10,6 +12,7 @@ import android.view.Window
 import kotlinx.android.synthetic.main.dialog_ingredient.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.model.Ingredient
+import java.util.*
 
 /**
  * Created by Mustafa Ozhan on 2018-08-05.
@@ -28,7 +31,7 @@ class IngredientDialogFragment : DialogFragment() {
     }
 
     var ingredient: Ingredient? = null
-    private var uri: String? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_ingredient,
@@ -46,6 +49,11 @@ class IngredientDialogFragment : DialogFragment() {
 
     private fun setListeners() {
         btnDialogOk.setOnClickListener { dismiss() }
+        btnDialogTranslate.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#en/${Locale.getDefault().displayLanguage}/${dialog.txtDialogInformation.text}"))
+            ContextCompat.startActivity(dialog.context, browserIntent, null)
+            dismiss()
+        }
     }
 
     private fun initViews() {
