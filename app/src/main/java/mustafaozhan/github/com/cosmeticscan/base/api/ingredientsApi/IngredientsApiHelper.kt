@@ -27,7 +27,7 @@ constructor() : BaseApiHelper() {
         clientBuilder.addInterceptor {
             it.proceed(createInterceptorRequest(it))
         }
-        val endpoint = getString(R.string.exchange_rates_endpoint)
+        val endpoint = getString(R.string.url)
         val retrofit = initRxRetrofit(endpoint, clientBuilder.build())
         return retrofit.create(IngredientsApiServices::class.java)
     }

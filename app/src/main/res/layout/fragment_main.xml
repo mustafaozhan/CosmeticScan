@@ -4,64 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    tools:layout_editor_absoluteY="25dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewCamera"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toEndOf="@+id/imgLeft"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15">
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:weightSum="4"
+        app:layout_constraintBottom_toTopOf="@+id/mLoadingView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgLeft"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            tools:layout_editor_absoluteY="30dp" />
 
         <ImageView
             android:id="@+id/imgCamera"
-            android:layout_width="132dp"
+            android:layout_width="129dp"
             android:layout_height="132dp"
-            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:contentDescription="@string/icon"
             android:padding="5dp"
-            android:src="@drawable/camera" />
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewManual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imgRight"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15">
+            android:src="@drawable/camera"
+            tools:layout_editor_absoluteX="55dp" />
 
         <ImageView
             android:id="@+id/imgManual"
             android:layout_width="132dp"
             android:layout_height="132dp"
-            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:contentDescription="@string/icon"
             android:padding="5dp"
-            android:src="@drawable/manual" />
-    </android.support.v7.widget.CardView>
+            android:src="@drawable/manual"
+            tools:layout_editor_absoluteX="198dp" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        <ImageView
+            android:id="@+id/imgRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            tools:layout_editor_absoluteX="336dp"
+            tools:layout_editor_absoluteY="30dp" />
+    </LinearLayout>
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/mLoadingView"
@@ -81,103 +80,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <WebView
-        android:id="@+id/webView"
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/imgLeft"
-        android:layout_width="47dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardViewCamera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardViewCamera" />
-
-    <ImageView
-
-
-        android:id="@+id/imgRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardViewManual"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardViewManual" />
-
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/carViewMail"
-        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/carViewPlayStore"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85">
+        app:layout_constraintTop_toBottomOf="@+id/mLoadingView">
 
         <ImageView
             android:id="@+id/imgMail"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:contentDescription="@string/icon"
-            android:padding="5dp"
-            android:src="@drawable/mail" />
-    </android.support.v7.widget.CardView>
+            android:src="@drawable/mail"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="420dp" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/carViewGitHub"
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carViewPlayStore"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85">
 
         <ImageView
             android:id="@+id/imgGitHub"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:contentDescription="@string/icon"
-            android:padding="5dp"
-            android:src="@drawable/github" />
-    </android.support.v7.widget.CardView>
+            android:src="@drawable/github"
+            tools:layout_editor_absoluteX="273dp"
+            tools:layout_editor_absoluteY="405dp" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/carViewPlayStore"
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7">
 
         <ImageView
             android:id="@+id/imgPlayStore"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
             android:contentDescription="@string/icon"
-            android:padding="5dp"
-            android:src="@drawable/play_store" />
-    </android.support.v7.widget.CardView>
+            android:src="@drawable/play_store"
+            tools:layout_editor_absoluteX="111dp"
+            tools:layout_editor_absoluteY="389dp" />
+    </LinearLayout>
+
+
 </android.support.constraint.ConstraintLayout>

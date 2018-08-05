@@ -51,11 +51,14 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
 
     private fun setListeners() {
-        cardViewCamera.setOnClickListener { (activity as MainActivity).content.currentItem = 0 }
-        cardViewManual.setOnClickListener { (activity as MainActivity).content.currentItem = 2 }
-        carViewGitHub.setOnClickListener { showGithub() }
-        carViewMail.setOnClickListener { sendFeedBack() }
-        carViewPlayStore.setOnClickListener { showRateDialog() }
+        imgCamera.setOnClickListener { (activity as MainActivity).content.currentItem = 0 }
+        imgManual.setOnClickListener { (activity as MainActivity).content.currentItem = 2 }
+        imgGitHub.setOnClickListener {
+            (activity as MainActivity).showGithub()
+
+        }
+        imgMail.setOnClickListener { sendFeedBack() }
+        imgPlayStore.setOnClickListener { showRateDialog() }
     }
 
     override fun onPause() {
@@ -68,33 +71,6 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
         super.onResume()
     }
 
-    private fun showGithub() {
-        webView.apply {
-            bringToFront()
-            var newUserAgent: String? = settings.userAgentString
-            try {
-                val ua = settings.userAgentString
-                val androidOSString = settings.userAgentString.substring(ua.indexOf("("), ua.indexOf(")") + 1)
-                newUserAgent = settings.userAgentString.replace(androidOSString, "(X11; Linux x86_64)")
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            settings.apply {
-                loadWithOverviewMode = true
-                javaScriptEnabled = true
-                useWideViewPort = true
-                setSupportZoom(true)
-                builtInZoomControls = true
-                displayZoomControls = false
-                userAgentString = newUserAgent
-            }
-            loadUrl("https://github.com/mustafaozhan/CosmeticScan")
-            fadeIO(true)
-            bringToFront()
-            visibility = View.VISIBLE
-        }
-    }
 
     private fun showRateDialog() {
         val builder = AlertDialog.Builder(context, R.style.AlertDialogCustom)

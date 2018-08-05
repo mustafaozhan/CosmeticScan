@@ -34,17 +34,17 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupViewPager(content)
+        setupViewPager()
     }
 
-    private fun setupViewPager(viewPager: ViewPager) {
+    private fun setupViewPager() {
         val mAdapter = MainActivityViewPagerAdapter(supportFragmentManager)
         mAdapter.apply {
             addFrag(CameraFragment())
             addFrag(MainFragment())
             addFrag(ManualFragment())
         }
-        viewPager.apply {
+        content.apply {
             adapter = mAdapter
             currentItem = 1
         }
@@ -91,5 +91,33 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
 
         }
         mySnacky.build().show()
+    }
+
+     fun showGithub() {
+        webView.apply {
+            var newUserAgent: String? = settings.userAgentString
+            try {
+                val ua = settings.userAgentString
+                val androidOSString = settings.userAgentString.substring(ua.indexOf("("), ua.indexOf(")") + 1)
+                newUserAgent = settings.userAgentString.replace(androidOSString, "(X11; Linux x86_64)")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            settings.apply {
+                loadWithOverviewMode = true
+                javaScriptEnabled = true
+                useWideViewPort = true
+                setSupportZoom(true)
+                builtInZoomControls = true
+                displayZoomControls = false
+                userAgentString = newUserAgent
+            }
+            loadUrl("https://github.com/mustafaozhan/CosmeticScan")
+            fadeIO(true)
+            bringToFront()
+            visibility = View.VISIBLE
+        }
+
     }
 }

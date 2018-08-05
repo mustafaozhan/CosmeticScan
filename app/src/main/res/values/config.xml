@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="exchange_rates_endpoint">https://gist.githubusercontent.com/mustafaozhan/9e902045eb3c948038f9af2803561673/raw/c852f9a4560f7881f5ca4f928595ddfe396f58c2/</string>
+    <string name="url">https://gist.githubusercontent.com/mustafaozhan/9e902045eb3c948038f9af2803561673/raw/c852f9a4560f7881f5ca4f928595ddfe396f58c2/</string>
 </resources>
