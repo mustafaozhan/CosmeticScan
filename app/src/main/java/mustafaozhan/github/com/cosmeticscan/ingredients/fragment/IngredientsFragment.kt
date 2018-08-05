@@ -3,9 +3,12 @@ package mustafaozhan.github.com.cosmeticscan.ingredients.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.livinglifetechway.k4kotlin.TAG
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
+import mustafaozhan.github.com.cosmeticscan.base.model.Ingredient
+import mustafaozhan.github.com.cosmeticscan.dialog.IngredientDialogFragment
 import mustafaozhan.github.com.cosmeticscan.manual.adapter.IngredientAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -42,7 +45,14 @@ class IngredientsFragment : BaseMvvmFragment<IngredientsFragmentViewModel>() {
 
         initViews()
         initData()
+        initListeners()
 
+    }
+
+    private fun initListeners() {
+        ingredientAdapter.onItemSelectedListener = { ingredient: Ingredient, view: View, view1: View, i: Int ->
+            IngredientDialogFragment.newInstance(ingredient).show(fragmentManager, IngredientDialogFragment.TAG)
+        }
     }
 
     private fun initData() {

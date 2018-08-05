@@ -2,56 +2,73 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:padding="10sp">
 
     <RelativeLayout
         android:id="@+id/rLayoutContentDialog"
-        android:layout_width="match_parent"
+        android:layout_width="500sp"
         android:layout_height="300sp"
         android:layout_alignParentTop="true">
 
         <TextView
+            android:layout_toStartOf="@id/txtDialogRating"
             android:id="@+id/txtDialogName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:paddingEnd="10sp"
             android:paddingLeft="10sp"
-            android:textSize="20sp" />
+            android:paddingRight="10sp"
+            android:textColor="@color/textWhite"
+            android:textSize="20sp"
+            android:layout_toLeftOf="@id/txtDialogRating" />
 
         <TextView
+
             android:id="@+id/txtDialogRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:paddingLeft="10sp"
             android:paddingRight="10sp"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/txtDialogInformation"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtDialogName"
-            android:paddingLeft="10sp"
-            android:paddingRight="10sp"
-            android:paddingTop="20sp"
-            android:textSize="16sp" />
+            android:layout_below="@+id/txtDialogName">
 
-        <TextView
-            android:id="@+id/txtDialogCategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="10sp"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/txtDialogInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10sp"
+                android:paddingRight="10sp"
+                android:paddingTop="20sp"
+                android:textColor="@color/textWhite"
+                android:textSize="16sp" />
+        </ScrollView>
+
+        <!--<TextView-->
+            <!--android:layout_below="@+id/scrollView"-->
+            <!--android:id="@+id/txtDialogCategories"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:paddingLeft="10sp"-->
+            <!--android:textColor="@color/textWhite"-->
+            <!--android:textSize="15sp" />-->
 
     </RelativeLayout>
 
@@ -70,9 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:text="@string/translate"
-            android:textColor="@color/white"
-            android:layout_alignParentStart="true" />
+            android:textColor="@color/textWhite" />
 
 
         <Button
@@ -80,9 +97,9 @@
             style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="@string/ok"
-            android:textColor="@color/white"
-            android:layout_alignParentEnd="true" />
+            android:textColor="@color/textWhite" />
     </RelativeLayout>
 </RelativeLayout>

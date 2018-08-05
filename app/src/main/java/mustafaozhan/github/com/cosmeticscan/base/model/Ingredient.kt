@@ -15,4 +15,4 @@ data class Ingredient(
         @ColumnInfo(name = "name") var name: String,
         @ColumnInfo(name = "information") val information: String,
         @ColumnInfo(name = "category") val category: String,
-        @ColumnInfo(name = "rating") val rating: String)
+        @ColumnInfo(name = "rating") val rating: String):Serializable

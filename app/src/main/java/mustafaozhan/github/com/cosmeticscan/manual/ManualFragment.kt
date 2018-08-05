@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.jakewharton.rxbinding2.widget.textChanges
+import com.livinglifetechway.k4kotlin.TAG
 import kotlinx.android.synthetic.main.fragment_manual.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
+import mustafaozhan.github.com.cosmeticscan.base.model.Ingredient
+import mustafaozhan.github.com.cosmeticscan.dialog.IngredientDialogFragment
 import mustafaozhan.github.com.cosmeticscan.manual.adapter.IngredientAdapter
 
 /**
@@ -30,6 +33,13 @@ class ManualFragment : BaseMvvmFragment<ManualFragmentViewModel>() {
 
         initViews()
         initData()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        ingredientAdapter.onItemSelectedListener = { ingredient: Ingredient, view: View, view1: View, i: Int ->
+           IngredientDialogFragment.newInstance(ingredient).show(fragmentManager,IngredientDialogFragment.TAG)
+        }
     }
 
     private fun initData() {

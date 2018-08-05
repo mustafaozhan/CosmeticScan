@@ -58,7 +58,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     private fun setListeners() {
         txtScan.setOnClickListener {
             if (txtScan.text.toString().length > 1) {
-//                getBaseActivity().replaceFragment(IngredientsFragment.newInstance(viewModel.foundedListToString()), true)
                 val intent = Intent(context, IngredientsActivity::class.java)
                 intent.putExtra(IngredientsFragment.INGREDIENTS, viewModel.foundedListToString())
                 startActivity(intent)
