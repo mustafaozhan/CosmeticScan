@@ -51,8 +51,8 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
 
     private fun setListeners() {
-        cardViewCamera.setOnClickListener { (activity as MainActivity).viewpager.currentItem = 0 }
-        cardViewManual.setOnClickListener { (activity as MainActivity).viewpager.currentItem = 2 }
+        cardViewCamera.setOnClickListener { (activity as MainActivity).content.currentItem = 0 }
+        cardViewManual.setOnClickListener { (activity as MainActivity).content.currentItem = 2 }
     }
 
     override fun onPause() {

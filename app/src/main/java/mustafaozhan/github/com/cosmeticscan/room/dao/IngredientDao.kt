@@ -17,4 +17,7 @@ abstract class IngredientDao {
     @Query("SELECT * FROM ingredient")
     abstract fun getAllIngredients(): MutableList<Ingredient>
 
+    @Query("SELECT * FROM ingredient WHERE name=:name")
+    abstract fun getIngredientsByName(name: String): Ingredient
+
 }

@@ -16,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected abstract fun getLayoutResId(): Int
 
     @IdRes
-    open var containerId: Int = R.id.viewpager
+    open var containerId: Int = R.id.content
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

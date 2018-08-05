@@ -58,7 +58,7 @@
                     android:layout_toStartOf="@+id/btnRefresh"
                     android:gravity="center"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btnRefresh"

@@ -3,6 +3,7 @@ package mustafaozhan.github.com.cosmeticscan.camera
 import android.Manifest
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.view.SurfaceHolder
 import android.view.View
@@ -15,7 +16,8 @@ import kotlinx.android.synthetic.main.fragment_camera.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.reObserve
-import mustafaozhan.github.com.cosmeticscan.ingredients.IngredientsFragment
+import mustafaozhan.github.com.cosmeticscan.ingredients.activity.IngredientsActivity
+import mustafaozhan.github.com.cosmeticscan.ingredients.fragment.IngredientsFragment
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
@@ -40,13 +42,26 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
         init()
         setListeners()
+        initLiveData()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initLiveData() {
+        viewModel.foundedListLiveData.reObserve(this, Observer { it ->
+            it?.let {
+                txtScan.text = "We found ${it.size} ingredient(s) click for details"
+            }
+        })
     }
 
 
     private fun setListeners() {
         txtScan.setOnClickListener {
             if (txtScan.text.toString().length > 1) {
-                getBaseActivity().replaceFragment(IngredientsFragment.newInstance(viewModel.foundedList), true)
+//                getBaseActivity().replaceFragment(IngredientsFragment.newInstance(viewModel.foundedListToString()), true)
+                val intent = Intent(context, IngredientsActivity::class.java)
+                intent.putExtra(IngredientsFragment.INGREDIENTS, viewModel.foundedListToString())
+                startActivity(intent)
             }
         }
         btnRefresh.setOnClickListener { refresh() }
@@ -66,20 +81,10 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
     }
 
     override fun release() {}
+
     @SuppressLint("SetTextI18n")
     override fun receiveDetections(detections: Detector.Detections<TextBlock>) {
-        val items = detections.detectedItems
-        if (items.size() != 0) {
-
-            val stringBuilder = StringBuilder()
-            for (i in 0 until items.size()) {
-                val item = items.valueAt(i)
-                stringBuilder.append(item.value)
-            }
-            viewModel.searchForIngredients(stringBuilder.toString())
-            txtScan.text = "We found ${viewModel.foundedList.size + 1} ingredient(s) click for details"
-
-        }
+        viewModel.searchForIngredients(detections.detectedItems)
     }
 
     fun refresh() {
@@ -114,7 +119,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
     override fun onPause() {
         super.onPause()
-        cameraSource?.stop()
         refresh()
     }
 
