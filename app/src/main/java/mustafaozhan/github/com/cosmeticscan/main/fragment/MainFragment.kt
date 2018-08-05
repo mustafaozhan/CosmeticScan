@@ -53,6 +53,9 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
     private fun setListeners() {
         cardViewCamera.setOnClickListener { (activity as MainActivity).content.currentItem = 0 }
         cardViewManual.setOnClickListener { (activity as MainActivity).content.currentItem = 2 }
+        carViewGitHub.setOnClickListener { showGithub() }
+        carViewMail.setOnClickListener { sendFeedBack() }
+        carViewPlayStore.setOnClickListener { showRateDialog() }
     }
 
     override fun onPause() {
@@ -67,6 +70,7 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
     private fun showGithub() {
         webView.apply {
+            bringToFront()
             var newUserAgent: String? = settings.userAgentString
             try {
                 val ua = settings.userAgentString
