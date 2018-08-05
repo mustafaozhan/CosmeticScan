@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.view.View
 import de.mateware.snacky.Snacky
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseFragment
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmActivity
 import mustafaozhan.github.com.cosmeticscan.camera.CameraFragment
+import mustafaozhan.github.com.cosmeticscan.extensions.fadeIO
 import mustafaozhan.github.com.cosmeticscan.main.adapter.MainActivityViewPagerAdapter
 import mustafaozhan.github.com.cosmeticscan.main.fragment.MainFragment
 import mustafaozhan.github.com.cosmeticscan.manual.ManualFragment
@@ -42,19 +45,19 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
             addFrag(ManualFragment())
         }
         viewPager.apply {
-            adapter=mAdapter
+            adapter = mAdapter
             currentItem = 1
         }
     }
 
     override fun onBackPressed() {
         when {
-//            webView.visibility == View.VISIBLE -> {
-//                webView.apply {
-//                    fadeIO(false)
-//                    visibility = View.GONE
-//                }
-//            }
+            webView.visibility == View.VISIBLE -> {
+                webView.apply {
+                    fadeIO(false)
+                    visibility = View.GONE
+                }
+            }
             else -> {
                 if (doubleBackToExitPressedOnce) {
                     super.onBackPressed()
