@@ -25,9 +25,7 @@ class MainFragmentViewModel : BaseViewModel() {
                 ::ingredientsDownloadSuccess, ::ingredientsDownloadFail)
     }
 
-    private fun ingredientsDownloadFail(throwable: Throwable) {
-
-    }
+    private fun ingredientsDownloadFail(throwable: Throwable) {}
 
     private fun ingredientsDownloadSuccess(ingredientsResponse: MutableList<Ingredient>) {
         ingredientsResponse.forEach {

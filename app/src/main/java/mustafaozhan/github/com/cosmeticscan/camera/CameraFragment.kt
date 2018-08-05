@@ -23,7 +23,7 @@ import mustafaozhan.github.com.cosmeticscan.main.listener.PagePositionChangeList
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
  */
-class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, Detector.Processor<TextBlock>,PagePositionChangeListener {
+class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, Detector.Processor<TextBlock>, PagePositionChangeListener {
 
 
     companion object {
@@ -80,6 +80,7 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
         textRecognizer!!.setProcessor(this)
     }
 
+
     override fun release() {}
 
     @SuppressLint("SetTextI18n")
@@ -124,13 +125,13 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
 
     @SuppressLint("MissingPermission")
     override fun onPagePositionChange(active: Int) {
-        if(active==0){
+        if (active == 0) {
             try {
                 cameraSource?.start(surfaceView.holder)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }else{
+        } else {
             cameraSource?.release()
         }
     }

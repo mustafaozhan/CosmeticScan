@@ -48,7 +48,7 @@
             android:layout_height="132dp"
             android:layout_weight="1"
             android:contentDescription="@string/icon"
-            android:padding="5dp"
+            android:padding="15dp"
             android:src="@drawable/manual"
             tools:layout_editor_absoluteX="198dp" />
 
@@ -113,6 +113,7 @@
         <ImageView
             android:id="@+id/imgGitHub"
             android:layout_width="96dp"
+            android:padding="5dp"
             android:layout_height="96dp"
             android:layout_weight="1"
             android:contentDescription="@string/icon"
@@ -125,6 +126,7 @@
             android:id="@+id/imgPlayStore"
             android:layout_width="96dp"
             android:layout_height="96dp"
+            android:padding="10dp"
             android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:contentDescription="@string/icon"
