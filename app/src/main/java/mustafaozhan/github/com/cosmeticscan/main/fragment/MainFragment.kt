@@ -60,11 +60,11 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
 
     private fun setListeners() {
-        imgCamera.setOnClickListener { getBaseActivity().replaceFragment(CameraFragment.newInstance(),true) }
-        imgManual.setOnClickListener { getBaseActivity().replaceFragment(ManualFragment.newInstance(),true)}
-        imgGitHub.setOnClickListener {
-            (activity as MainActivity).showGithub()
-        }
+        imgCamera.setOnClickListener { getBaseActivity().replaceFragment(CameraFragment.newInstance(), true, true) }
+        imgLeft.setOnClickListener { getBaseActivity().replaceFragment(CameraFragment.newInstance(), true, true) }
+        imgRight.setOnClickListener { getBaseActivity().replaceFragment(ManualFragment.newInstance(), true) }
+        imgManual.setOnClickListener { getBaseActivity().replaceFragment(ManualFragment.newInstance(), true) }
+        imgGitHub.setOnClickListener { (activity as MainActivity).showGithub() }
         imgMail.setOnClickListener { sendFeedBack() }
         imgPlayStore.setOnClickListener { showRateDialog() }
     }

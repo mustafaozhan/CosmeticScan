@@ -40,25 +40,31 @@ abstract class BaseActivity : AppCompatActivity() {
         addFragment(containerId, fragment)
     }
 
-    fun replaceFragment(fragment: BaseFragment, withBackStack: Boolean) {
+    fun replaceFragment(fragment: BaseFragment, withBackStack: Boolean, toCamera: Boolean = false) {
         if (withBackStack) {
-            replaceFragmentWithBackStack(containerId, fragment)
+            replaceFragmentWithBackStack(containerId, fragment, toCamera)
         } else {
-            replaceFragment(containerId, fragment)
+            replaceFragment(containerId, fragment, toCamera)
         }
     }
 
-    protected fun replaceFragmentWithBackStack(containerViewId: Int, fragment: BaseFragment) {
+    protected fun replaceFragmentWithBackStack(containerViewId: Int, fragment: BaseFragment, toCamera: Boolean = false) {
         val ft = supportFragmentManager.beginTransaction()
-        ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+        if (toCamera)
+            ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+        else
+            ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
         ft.replace(containerViewId, fragment, fragment.fragmentTag)
         ft.addToBackStack(null)
         ft.commit()
     }
 
-    protected fun replaceFragment(containerViewId: Int, fragment: BaseFragment) {
+    protected fun replaceFragment(containerViewId: Int, fragment: BaseFragment, toCamera: Boolean = false) {
         val ft = supportFragmentManager.beginTransaction()
-        ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+        if (toCamera)
+            ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+        else
+            ft.setCustomAnimations(R.anim.exit_to_right, R.anim.enter_from_left)
         ft.replace(containerViewId, fragment, fragment.fragmentTag)
         ft.commit()
     }
