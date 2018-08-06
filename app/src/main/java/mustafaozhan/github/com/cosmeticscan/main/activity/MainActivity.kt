@@ -33,8 +33,6 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
     override fun getLayoutResId(): Int = R.layout.activity_main
 
 
-
-
     override fun onBackPressed() {
         when {
             webView.visibility == View.VISIBLE -> {
@@ -44,15 +42,20 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
                 }
             }
             else -> {
-                if (doubleBackToExitPressedOnce) {
-                    super.onBackPressed()
-                    return
+                when {
+                    supportFragmentManager.findFragmentById(containerId) is MainFragment -> {
+                        if (doubleBackToExitPressedOnce) {
+                            super.onBackPressed()
+                            return
+                        }
+                        doubleBackToExitPressedOnce = true
+                        snacky("Please click BACK again to exit")
+                        Handler().postDelayed({
+                            doubleBackToExitPressedOnce = false
+                        }, 2000)
+                    }
+                    else -> super.onBackPressed()
                 }
-                doubleBackToExitPressedOnce = true
-                snacky("Please click BACK again to exit")
-                Handler().postDelayed({
-                    doubleBackToExitPressedOnce = false
-                }, 2000)
             }
 
         }
@@ -78,7 +81,7 @@ class MainActivity : BaseMvvmActivity<MainActivityViewModel>() {
         mySnacky.build().show()
     }
 
-     fun showGithub() {
+    fun showGithub() {
         webView.apply {
             var newUserAgent: String? = settings.userAgentString
             try {
