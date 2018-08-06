@@ -18,12 +18,11 @@ import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.reObserve
 import mustafaozhan.github.com.cosmeticscan.ingredients.activity.IngredientsActivity
 import mustafaozhan.github.com.cosmeticscan.ingredients.fragment.IngredientsFragment
-import mustafaozhan.github.com.cosmeticscan.main.listener.PagePositionChangeListener
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.
  */
-class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, Detector.Processor<TextBlock>, PagePositionChangeListener {
+class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolder.Callback, Detector.Processor<TextBlock> {
 
 
     companion object {
@@ -123,17 +122,6 @@ class CameraFragment : BaseMvvmFragment<CameraFragmentViewModel>(), SurfaceHolde
         refresh()
     }
 
-    @SuppressLint("MissingPermission")
-    override fun onPagePositionChange(active: Int) {
-        if (active == 0) {
-            try {
-                cameraSource?.start(surfaceView.holder)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        } else {
-            cameraSource?.release()
-        }
-    }
+
 
 }

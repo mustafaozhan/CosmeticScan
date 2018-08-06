@@ -11,8 +11,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.BaseMvvmFragment
+import mustafaozhan.github.com.cosmeticscan.camera.CameraFragment
 import mustafaozhan.github.com.cosmeticscan.extensions.fadeIO
 import mustafaozhan.github.com.cosmeticscan.main.activity.MainActivity
+import mustafaozhan.github.com.cosmeticscan.manual.ManualFragment
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -35,27 +37,33 @@ class MainFragment : BaseMvvmFragment<MainFragmentViewModel>() {
 
         setListeners()
 
-        doAsync {
-            initData()
-            uiThread {
-                mLoadingView.smoothToHide()
-            }
-        }
+
+        initData()
+
+
     }
 
     private fun initData() {
         viewModel.loadPreferences()
-        if (viewModel.firstRun)
-            viewModel.getAllIngredients()
+        if (viewModel.firstRun) {
+            doAsync {
+                viewModel.getAllIngredients()
+                viewModel.firstRun = false
+                uiThread {
+                    mLoadingView.smoothToHide()
+                }
+            }
+        } else {
+            mLoadingView.smoothToHide()
+        }
     }
 
 
     private fun setListeners() {
-        imgCamera.setOnClickListener { (activity as MainActivity).content.currentItem = 0 }
-        imgManual.setOnClickListener { (activity as MainActivity).content.currentItem = 2 }
+        imgCamera.setOnClickListener { getBaseActivity().replaceFragment(CameraFragment.newInstance(),true) }
+        imgManual.setOnClickListener { getBaseActivity().replaceFragment(ManualFragment.newInstance(),true)}
         imgGitHub.setOnClickListener {
             (activity as MainActivity).showGithub()
-
         }
         imgMail.setOnClickListener { sendFeedBack() }
         imgPlayStore.setOnClickListener { showRateDialog() }
