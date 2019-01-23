@@ -15,10 +15,3 @@ See datailed information
 
 <img src="https://s19.postimg.cc/x6inj0pab/image.png" width="250px" />
 You can search ingredients also manuel
-
-
-
-
-
-
-
