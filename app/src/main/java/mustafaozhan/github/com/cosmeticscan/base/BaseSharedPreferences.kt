@@ -2,7 +2,7 @@ package mustafaozhan.github.com.cosmeticscan.base
 
 import android.content.Context
 import android.content.SharedPreferences
-import mustafaozhan.github.com.cosmeticscan.application.Application
+import mustafaozhan.github.com.cosmeticscan.app.Application
 
 /**
  * Created by Mustafa Ozhan on 2018-07-31.

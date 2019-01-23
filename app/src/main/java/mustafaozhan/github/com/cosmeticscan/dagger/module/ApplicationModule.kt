@@ -5,7 +5,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import mustafaozhan.github.com.cosmeticscan.annotation.ApplicationContext
-import mustafaozhan.github.com.cosmeticscan.application.Application
+import mustafaozhan.github.com.cosmeticscan.app.Application
 import mustafaozhan.github.com.cosmeticscan.room.AppDatabase
 import mustafaozhan.github.com.cosmeticscan.room.AppExecutors
 import mustafaozhan.github.com.cosmeticscan.room.AppExecutors.Companion.THREAD_COUNT

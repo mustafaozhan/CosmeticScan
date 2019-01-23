@@ -1,4 +1,4 @@
-package mustafaozhan.github.com.cosmeticscan.application
+package mustafaozhan.github.com.cosmeticscan.app
 
 import android.content.Context
 import android.support.multidex.MultiDexApplication

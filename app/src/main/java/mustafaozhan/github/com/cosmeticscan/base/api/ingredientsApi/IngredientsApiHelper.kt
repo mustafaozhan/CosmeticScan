@@ -2,7 +2,7 @@ package mustafaozhan.github.com.mycurrencies.base.api.exchangerates
 
 import mustafaozhan.github.com.cosmeticscan.R
 import mustafaozhan.github.com.cosmeticscan.base.api.ingredientsApi.IngredientsApiServices
-import mustafaozhan.github.com.mycurrencies.base.api.BaseApiHelper
+import mustafaozhan.github.com.cosmeticscan.base.api.BaseApiHelper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request

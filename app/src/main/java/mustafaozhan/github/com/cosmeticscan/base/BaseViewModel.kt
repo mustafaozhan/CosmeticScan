@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import mustafaozhan.github.com.cosmeticscan.application.Application
+import mustafaozhan.github.com.cosmeticscan.app.Application
 import mustafaozhan.github.com.cosmeticscan.dagger.component.ViewModelComponent
 import mustafaozhan.github.com.cosmeticscan.tools.applySchedulers
 import mustafaozhan.github.com.mycurrencies.tools.DataManager
