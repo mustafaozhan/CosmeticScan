@@ -15,3 +15,8 @@ See datailed information
 
 <img src="https://s19.postimg.cc/x6inj0pab/image.png" width="250px" />
 You can search ingredients also manuel
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/mustafaozhan/CosmeticScan/badge.svg?style=beer-square)](https://beerpay.io/mustafaozhan/CosmeticScan)  [![Beerpay](https://beerpay.io/mustafaozhan/CosmeticScan/make-wish.svg?style=flat-square)](https://beerpay.io/mustafaozhan/CosmeticScan?focus=wish)
