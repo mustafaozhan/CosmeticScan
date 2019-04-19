@@ -1,6 +1,8 @@
 # CosmeticScan
 Scanning Ingredients of Cosmetic product in order to describe their health effect
 
+<a href='https://ko-fi.com/B0B2TZMH' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+
 <img src="https://s19.postimg.cc/3smx319lf/image.png" width="250px" /> <img src="https://s19.postimg.cc/p10ll0tdf/image.png" width="250px" />
 
 You can search ingredients with phone camera.
@@ -15,8 +17,3 @@ See datailed information
 
 <img src="https://s19.postimg.cc/x6inj0pab/image.png" width="250px" />
 You can search ingredients also manuel
-
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
-
-[![Beerpay](https://beerpay.io/mustafaozhan/CosmeticScan/badge.svg?style=beer-square)](https://beerpay.io/mustafaozhan/CosmeticScan)  [![Beerpay](https://beerpay.io/mustafaozhan/CosmeticScan/make-wish.svg?style=flat-square)](https://beerpay.io/mustafaozhan/CosmeticScan?focus=wish)
